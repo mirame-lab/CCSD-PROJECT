@@ -78,27 +78,25 @@ data.orders.forEach((order) => {
 <Layout title="Astro Ecommerce">
 	<main>
     <Navbar />
-    <div class="container mt-5">
-      <h3>Product Lists</h3>
-      <p>Components and blocks for Product Lists</p>
-      <div class="row mt-5">
-        {data.products.map(product => 
+   <div class="container mt-5">
+
+      <div class="row mb-8">
+        <div class="d-block text-center mb-5">
+          <h3>Shop by category</h3>
+          <a class="text-dark font-weight-bold" href="#">Browse all categories &#62;</a>
+        </div>
+        {data.categories.slice(0, 4).map(category => 
           <div class="col-md-6 col-lg-3">
-            <CardProduct 
-              thumb_src = {product.thumb_src}
-              thumb_alt = {product.thumb_alt}
-              color = {product.color}
-              colors = {product.colors}
-              title = {product.title}
-              description = {product.description}
-              price = {product.price}
-              position = "center"
+            <CardCategory
+              thumb_src = {category.thumb_src}
+              title = {category.title}
+              collection = {category.collection}
             />
           </div>
-        )}        
+        )}
       </div>
 
-      <h3>Product Lists</h3>
+            <h3>Product Lists</h3>
       <p>Cards with full details</p>
       <div class="row">
         {data.products.map(product => 
@@ -115,22 +113,6 @@ data.orders.forEach((order) => {
             />
           </div>
         )}        
-      </div>
-
-      <div class="row mb-8">
-        <div class="d-block text-center mb-5">
-          <h3>Shop by category</h3>
-          <a class="text-dark font-weight-bold" href="#">Browse all categories &#62;</a>
-        </div>
-        {data.categories.slice(0, 4).map(category => 
-          <div class="col-md-6 col-lg-3">
-            <CardCategory
-              thumb_src = {category.thumb_src}
-              title = {category.title}
-              collection = {category.collection}
-            />
-          </div>
-        )}
       </div>
 
       <div class="row mb-5">
