@@ -14,9 +14,8 @@ export default function CardProduct({
   classList,
   cta,
 }: Props) {
-
+  
   const classBody = ((cta != null) ? "align-items-end d-flex" : "text-center w-100 pt-8" );
-
   return (
     <>
       <a href="#">
