@@ -1,4 +1,4 @@
-package Model;
+package com.example.ccsd_project.Model;
 
 public class Services {
    private String name, category, description;

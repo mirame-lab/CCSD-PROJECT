@@ -1,4 +1,4 @@
-package Model;
+package com.example.ccsd_project.Model;
 
 public interface InnerServices {
     final String[] carTypes = {"small","compact","hatchback","sedan","sedan luxury","4x4","suv","crossover","mpv","mpv luxury"};
