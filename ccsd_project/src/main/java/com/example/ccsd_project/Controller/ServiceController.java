@@ -2,19 +2,14 @@ package com.example.ccsd_project.Controller;
 
 import java.util.List;
 
+import com.example.ccsd_project.Model.ServicePackage.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.ccsd_project.Model.Services;
-
 @RestController
 public class ServiceController {
-    Services s1 = new Services("Car Cushion", "Automotive", "null");
-    Services s2 = new Services("Interior Packages", "Automotive", "null");
-    Services s3 = new Services("Uphosltery", "Domestic", "null");
-    Services s4 = new Services("Carpet/Floors", "Domestic/Commercial", "null");
 
-    List<Services> db = List.of(s1,s2,s3,s4);
+    List<Services> db = List.of(new CarSeats(),new InteriorPackages(),new Upholstery(),new Carpet());
     @GetMapping("/")
     public List<Services> get() {
         return db;
