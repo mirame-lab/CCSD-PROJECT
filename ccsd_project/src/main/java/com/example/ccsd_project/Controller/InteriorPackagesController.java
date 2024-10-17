@@ -25,7 +25,7 @@ public class InteriorPackagesController {
         return db;
     }
 
-    //function utk kurang serabut
+    //function utk senangkan hidup saya
     public void setPriceAllPackages() {
         // Package A
         db.get(0).carList.forEach((n) -> {setPrice(n, 240, 180);});
@@ -36,11 +36,9 @@ public class InteriorPackagesController {
         // Full Interior
         db.get(2).carList.forEach((n) -> {setPrice(n, 370, 290);});
 
-        // Full Interior
+        // Advance Full
         db.get(3).carList.forEach((n) -> {setPrice(n, 500, 400);});
 
-        // db.get(0).carList.get(0).setRate(180);
-        // db.get(0).carList.get(1).setRate(180);
 
     }
 
