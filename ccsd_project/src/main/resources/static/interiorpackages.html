@@ -894,45 +894,83 @@
                 loading="lazy"
               ></div>
             </div>
-            <div class="col-xl-5 col-lg-6 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
-              <div class="card d-flex blur justify-content-center shadow-lg my-sm-0 my-sm-6 mt-8 mb-5">
-                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-                  <div class="bg-gradient-primary shadow-primary border-radius-lg p-3">
+            <div
+              class="col-xl-5 col-lg-6 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5"
+            >
+              <div
+                class="card d-flex blur justify-content-center shadow-lg my-sm-0 my-sm-6 mt-8 mb-5"
+              >
+                <div
+                  class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent"
+                >
+                  <div
+                    class="bg-gradient-primary shadow-primary border-radius-lg p-3"
+                  >
                     <h3 class="text-white text-primary mb-0">
                       Interior Cleaning
                     </h3>
                   </div>
                 </div>
                 <div class="card-body">
-                  <h3 id="price">
-                        RM180
-                  </h3>
+                  <h3 id="price">RM180</h3>
                   <p class="pb-3" id="cardescription">
-                    Perodua Kancil,Daihatsu Mira, Suzuki Alto, Hyundai Atoz, Kia Picanto
+                    Perodua Kancil,Daihatsu Mira, Suzuki Alto, Hyundai Atoz, Kia
+                    Picanto
                   </p>
-                  <form id="interiorpackage-form" method="post" autocomplete="off">
+                  <form
+                    id="interiorpackage-form"
+                    onsubmit="uploadForm()"
+                    method="post"
+                    action="http://localhost:8080/order/"
+                  >
                     <div class="card-body p-0 my-3">
-                      
                       <div class="row">
                         <div class="col-md-6">
                           <div
                             class="input-group input-group-static input-group-outline mb-4"
                           >
+                            <input
+                              id="packageprice"
+                              name="packageprice"
+                              type="hidden"
+                              value="180"
+                            />
+                            <input
+                              id="servicename"
+                              name="servicename"
+                              type="hidden"
+                              value="Interior Cleaning"
+                            />
+                            <input
+                              id="pkgname"
+                              name="pkgname"
+                              type="hidden"
+                              value="Package A"
+                            />
+                            <input
+                            id="carname"
+                            name="carname"
+                            type="hidden"
+                            value="small"
+                          />
                             <label>Select car type:</label>
                             <div class="dropdown">
-                              <select class="btn btn-outline-secondary dropdown-toggle"
-                                      id="carlist"
-                                      aria-expanded="false"
-                                      onchange="getData()">
-                                <option value=0>Small</option>
-                                <option value=1>Compact</option>
-                                <option value=2>Sedan</option>
-                                <option value=3>Sedan luxury</option>
-                                <option value=4>SUV</option>
-                                <option value=5">4x4</option>
-                                <option value=6>Crossover</option>
-                                <option value=7>MPV</option>
-                                <option value=8>MPV Luxury</option>
+                              <select
+                                class="btn btn-outline-secondary dropdown-toggle"
+                                id="carlist"
+                                name="carlist"
+                                aria-expanded="false"
+                                onchange="getData()"
+                              >
+                                <option value="0">Small</option>
+                                <option value="1">Compact</option>
+                                <option value="2">Sedan</option>
+                                <option value="3">Sedan luxury</option>
+                                <option value="4">SUV</option>
+                                <option value="5">4x4</option>
+                                <option value="6">Crossover</option>
+                                <option value="7">MPV</option>
+                                <option value="8">MPV Luxury</option>
                               </select>
                             </div>
                           </div>
@@ -940,57 +978,83 @@
                       </div>
                       <div class="row">
                         <div class="col-md-6">
-                          <div class="input-group input-group-static input-group-outline mb-4">
+                          <div
+                            class="input-group input-group-static input-group-outline mb-4"
+                          >
                             <label>Select package:</label>
                             <div class="dropdown">
-                              <label for="packagelist"></label><select
+                              <label for="packagelist"></label
+                              ><select
                                 class="btn btn-outline-secondary dropdown-toggle"
                                 id="packagelist"
+                                name="packagelist"
                                 aria-expanded="false"
                                 onchange="getData()"
                               >
-                              <option value=0>Package A</option>
-                              <option value=1>Package B</option>
-                              <option value=2>Full Interior</option>
-                              <option value=3>Advance Full</option>
+                                <option value="0">Package A</option>
+                                <option value="1">Package B</option>
+                                <option value="2">Full Interior</option>
+                                <option value="3">Advance Full</option>
                               </select>
                               <script>
-                                var selectedIndex
+                                var selectedIndex;
                                 async function getData() {
-                                  let data = await fetch("http://localhost:8080/interior_packages")
+                                  let data = await fetch(
+                                    "http://localhost:8080/interior_packages"
+                                  )
                                     .then((response) => {
-                                    if (!response.ok) {
-                                      throw new Error(
-                                        "Network response was not ok"
-                                      );
-                                    }
-                                    return response.json();
-                                  })
+                                      if (!response.ok) {
+                                        throw new Error(
+                                          "Network response was not ok"
+                                        );
+                                      }
+                                      return response.json();
+                                    })
                                     .catch((error) => {
-                                    console.error("Error:", error);
-                                  });
+                                      console.error("Error:", error);
+                                    });
                                   //get list of packages
-                                  console.log(data)
-                                  const packageList =[]
-                                  for(var i in data){packageList.push([i,data[i].packageName])}
-                                  var packageindex = document.getElementById("packagelist").value
-                                  var carindex = document.getElementById("carlist").value
-                                  console.log("package index: ",packageindex)
-                                  console.log("car index: ",carindex)
+                                  console.log(data);
+                                  const packageList = [];
+                                  for (var i in data) {
+                                    packageList.push([i, data[i].packageName]);
+                                  }
+                                  var packageindex =
+                                    document.getElementById(
+                                      "packagelist"
+                                    ).value;
+                                  var carindex =
+                                    document.getElementById("carlist").value;
+                                  // console.log("package index: ",packageindex)
+                                  // console.log("car index: ",carindex)
 
-                                  var selectedprice = data[packageindex].carList[carindex].rate
-                                  var cardesc = data[packageindex].carList[carindex].typedesc
-                                  console.log(data[packageindex].carList[carindex].rate)
-                                  document.getElementById("price").innerHTML = "RM"+selectedprice
-                                  document.getElementById("cardescription").innerHTML = cardesc
+                                  var selectedprice =
+                                    data[packageindex].carList[carindex].rate;
+                                  var cardesc =
+                                    data[packageindex].carList[carindex]
+                                      .typedesc;
+                                  // console.log(data[packageindex].carList[carindex].rate)
+                                  document.getElementById("price").innerHTML =
+                                    "RM" + selectedprice;
+                                  document.getElementById(
+                                    "cardescription"
+                                  ).innerHTML = cardesc;
+                                  document.getElementById(
+                                    "packageprice"
+                                  ).value = selectedprice;
+                                  document.getElementById(
+                                    "pkgname"
+                                  ).value = data[packageindex].packageName;
+                                  document.getElementById(
+                                    "carname"
+                                  ).value = data[packageindex].carList[carindex]
+                                  .type;
                                 }
-
                               </script>
                             </div>
                           </div>
                         </div>
                       </div>
-
 
                       <div class="row">
                         <div class="col-md-12 text-center">
@@ -1004,6 +1068,26 @@
                       </div>
                     </div>
                   </form>
+                  <script>
+                    async function uploadForm() {
+                      const form = document.getElementById(
+                        "interiorpackage-form"
+                      );
+                      const submitter = document.querySelector(
+                        "button[type='submit']"
+                      );
+                      const formData = new FormData(form, submitter);
+                      var object = {};
+                      formData.forEach((value, key) => (object[key] = value));
+                      var json = JSON.stringify(object);
+                      await fetch("http://localhost:8080/order/", {
+                        method: "POST",
+                        body: json,
+                      })
+                        .then((result) => result.text())
+                        .then((text) => alert(text));
+                    }
+                  </script>
                 </div>
               </div>
             </div>
