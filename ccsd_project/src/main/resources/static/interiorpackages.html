@@ -887,8 +887,9 @@
             >
               <div
                 class="position-relative h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center"
+                id="pkgimg"
                 style="
-                  background-image: url('../assets/img/illustrations/illustration-signin.jpg');
+                  background-image: url('../assets/img/illustrations/packagea.png');
                   background-size: cover;
                 "
                 loading="lazy"
@@ -948,11 +949,11 @@
                               value="Package A"
                             />
                             <input
-                            id="carname"
-                            name="carname"
-                            type="hidden"
-                            value="small"
-                          />
+                              id="carname"
+                              name="carname"
+                              type="hidden"
+                              value="small"
+                            />
                             <label>Select car type:</label>
                             <div class="dropdown">
                               <select
@@ -989,7 +990,7 @@
                                 id="packagelist"
                                 name="packagelist"
                                 aria-expanded="false"
-                                onchange="getData()"
+                                onchange="getData();changeImage();"
                               >
                                 <option value="0">Package A</option>
                                 <option value="1">Package B</option>
@@ -1042,13 +1043,35 @@
                                   document.getElementById(
                                     "packageprice"
                                   ).value = selectedprice;
-                                  document.getElementById(
-                                    "pkgname"
-                                  ).value = data[packageindex].packageName;
-                                  document.getElementById(
-                                    "carname"
-                                  ).value = data[packageindex].carList[carindex]
-                                  .type;
+                                  document.getElementById("pkgname").value =
+                                    data[packageindex].packageName;
+                                  document.getElementById("carname").value =
+                                    data[packageindex].carList[carindex].type;
+                                }
+
+                                function changeImage() {
+                                  var url;
+                                  var currentPkgVal =
+                                    document.getElementById(
+                                      "packagelist"
+                                    ).value;
+                                    
+                                  switch (parseInt(currentPkgVal)) {
+                                    case 0:
+                                      url ="url('../assets/img/illustrations/packagea.png')";
+                                      break;
+                                    case 1:
+                                      url ="url('../assets/img/illustrations/packageb.png')";
+                                      break;
+                                    case 2:
+                                      url ="url('../assets/img/illustrations/fullinterior.png')";
+                                      break;
+                                    case 3:
+                                      url ="url('../assets/img/illustrations/advancedfull.png')";
+                                      break;
+                                  }
+                                  console.log(url)
+                                  document.getElementById("pkgimg").style.backgroundImage = url;
                                 }
                               </script>
                             </div>
