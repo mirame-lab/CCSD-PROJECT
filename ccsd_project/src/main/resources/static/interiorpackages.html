@@ -920,7 +920,6 @@
                   </p>
                   <form
                     id="interiorpackage-form"
-                    onsubmit="uploadForm()"
                     method="post"
                     action="http://localhost:8080/order/"
                   >
@@ -1091,26 +1090,6 @@
                       </div>
                     </div>
                   </form>
-                  <script>
-                    async function uploadForm() {
-                      const form = document.getElementById(
-                        "interiorpackage-form"
-                      );
-                      const submitter = document.querySelector(
-                        "button[type='submit']"
-                      );
-                      const formData = new FormData(form, submitter);
-                      var object = {};
-                      formData.forEach((value, key) => (object[key] = value));
-                      var json = JSON.stringify(object);
-                      await fetch("http://localhost:8080/order/", {
-                        method: "POST",
-                        body: json,
-                      })
-                        .then((result) => result.text())
-                        .then((text) => alert(text));
-                    }
-                  </script>
                 </div>
               </div>
             </div>
