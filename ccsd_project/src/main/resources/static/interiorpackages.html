@@ -921,7 +921,7 @@
                   <form
                     id="interiorpackage-form"
                     method="post"
-                    action="http://localhost:8080/order/"
+                    action="http://localhost:8081/order/"
                   >
                     <div class="card-body p-0 my-3">
                       <div class="row">
@@ -1000,7 +1000,7 @@
                                 var selectedIndex;
                                 async function getData() {
                                   let data = await fetch(
-                                    "http://localhost:8080/interior_packages"
+                                    "http://localhost:8081/interior_packages"
                                   )
                                     .then((response) => {
                                       if (!response.ok) {
