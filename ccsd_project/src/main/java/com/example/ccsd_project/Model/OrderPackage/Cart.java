@@ -1,15 +1,17 @@
 package com.example.ccsd_project.Model.OrderPackage;
 
 public class Cart {
+    private String id;
     private String service, classification, type;
     private double price;
+    private int quantity = 1;
 
-
-    public Cart(String s,String c,String t,double p){
+    public Cart(String id,String s,String c,String t,double p){
         service = s;
         classification = c;
         type = t;
         price = p;
+        this.id = id;
     }
 
     public String getService() {
@@ -43,4 +45,19 @@ public class Cart {
     public void setPrice(double price) {
         this.price = price;
     }
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
 }
