@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ServiceController {
 
     List<Services> db = List.of(new CarSeats(),new InteriorPackages(),new Upholstery(),new Carpet());
-    @GetMapping("/")
+    @GetMapping("/services")
     public List<Services> get() {
         return db;
     }
