@@ -635,7 +635,9 @@
 
           }
 
-          document.getElementById("quantity").addEventListener("change", async function (event) {
+        }
+
+        document.getElementById("quantity").addEventListener("change", async function (event) {
             const updatedValue = parseInt(event.target.value); // Get the new input value
             console.log(typeof updatedValue);
             const data = { 'quantity': updatedValue }; // update quantity
@@ -658,23 +660,9 @@
             } catch (error) {
               console.error('Request error:', error);
             }
-            await fetch(
-              "http://localhost:8081/order/"
-            )
-              .then((response) => {
-                if (!response.ok) {
-                  throw new Error(
-                    "Network response was not ok"
-                  );
-                }
-                console.log(response)
-              })
-              .catch((error) => {
-                console.error("Error:", error);
-              });
+            
             
           });
-        }
       </script>
     </section>
 
