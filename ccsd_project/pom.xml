@@ -20,6 +20,13 @@
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>net.optionfactory.spring</groupId>
+            <artifactId>thymeleaf</artifactId>
+            <version>19.10</version>
+        </dependency>
+
         <!-- Spring Boot JDBC Dependency -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
