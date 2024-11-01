@@ -57,6 +57,22 @@
       data-site="YOUR_DOMAIN_HERE"
       src="https://api.nepcha.com/js/nepcha-analytics.js"
     ></script>
+    <style>
+      /* CSS for sticky bottom element */
+      .sticky-bottom {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        padding: 10px;
+        text-align: center;
+        opacity: 0;           /* Start hidden */
+        transition: opacity 1s ease; /* Smooth fade in/out transition */
+      }
+
+      .visible {
+        opacity: 1;  /* Fully visible */
+      }
+    </style>
   </head>
 
   <body class="contact-us">
@@ -775,12 +791,12 @@
                         <div class="col-md-12 g-0">
                           <a
                             class="dropdown-item py-2 ps-3 border-radius-md"
-                            href="../pages/about-us.html"
+                            href="./order"
                           >
                             <h6
                               class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0"
                             >
-                              Getting Started
+                              Cart
                             </h6>
                             <span class="text-sm"
                               >All about overview, quick start, license and
@@ -921,7 +937,8 @@
                   <form
                     id="interiorpackage-form"
                     method="post"
-                    action="http://localhost:8081/order/"
+                    action="/interiorpackages"
+
                   >
                     <div class="card-body p-0 my-3">
                       <div class="row">
@@ -1072,6 +1089,7 @@
                                   console.log(url)
                                   document.getElementById("pkgimg").style.backgroundImage = url;
                                 }
+
                               </script>
                             </div>
                           </div>
@@ -1083,9 +1101,30 @@
                           <button
                             type="submit"
                             class="btn bg-gradient-primary mt-3 mb-0"
+                            onclick="showStickyElement()"
                           >
                             Add to cart
                           </button>
+                          <script >
+                            function showStickyElement() {
+                                const element = document.getElementById("stickyElement");
+                                element.classList.add("visible");  // Show the element
+
+                                // Set a timer to fade out the element after 3 seconds
+                                setTimeout(() => {
+                                    element.classList.remove("visible");  // Hide the element with fade
+                                }, 3000);
+                            }
+                            window.onload = function() {
+                              const urlParams = new URLSearchParams(window.location.search);
+                              const submitted = urlParams.has("submitted");
+
+                              if (submitted) {
+                                showStickyElement() // Trigger the JavaScript function
+                              }
+                            }
+
+                          </script>
                         </div>
                       </div>
                     </div>
@@ -1098,6 +1137,9 @@
       </div>
     </section>
     <!-- -------- END HEADER 8 w/ card over right bg image ------- -->
+    <div id="stickyElement" class="sticky-bottom alert alert-success text-white font-weight-bold" role="alert">
+      Item added to cart!
+    </div>
     <footer class="footer pt-5 mt-5">
       <div class="container">
         <div class="row">

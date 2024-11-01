@@ -59,5 +59,8 @@ public class Cart {
     public void setId(String id) {
         this.id = id;
     }
+    public double calculatePrice(){
+        return price*quantity;
+    }
 
 }
