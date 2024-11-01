@@ -17,5 +17,10 @@ public class IndexController {
         return "interiorpackages";
     }
 
+    @GetMapping("/navbar")
+    String navbar(){
+        return "fragments/navbar";
+    }
+
 
 }
