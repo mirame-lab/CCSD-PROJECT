@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+  <head>
+    <title>Home</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <!-- Show "Sign In" button if the user is not logged in -->
+          <li sec:authorize="isAnonymous()">
+            <a th:href="@{/login}">Sign In</a>
+          </li>
+
+          <!-- Show user's name if the user is logged in -->
+          <li sec:authorize="isAuthenticated()">
+            <a th:href="@{/profile}"
+              >Hello, <span th:text="${#authentication.name}">User</span></a
+            >
+          </li>
+
+          <!-- Add other navigation links here, accessible to all users -->
+          <li><a th:href="@{/home}">Home</a></li>
+          <li><a th:href="@{/about}">About</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <h1>Welcome to the Home Page!</h1>
+      <!-- Main content goes here -->
+    </main>
+  </body>
+</html>
