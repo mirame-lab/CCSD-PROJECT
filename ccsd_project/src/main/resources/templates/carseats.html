@@ -82,11 +82,12 @@
     </div>
   </div>
   <!-- header with description -->
-  <section th:replace="~{fragments/formheader.html :: formheader('Interior Cleaning','Imagine stepping into a spotless, fresh car interior. A clean car isn’t just about looks—it creates a comfortable, healthy environment for every journey. 
-    First impressions matter; a clean interior shows pride in ownership. It also helps keep dust, allergens, and bacteria at bay, ensuring a healthier space for you and your passengers. Routine cleaning maintains your car’s seats, carpets, 
-    and dashboard, preventing wear and tear. Plus, a tidy car reduces stress and makes driving more enjoyable. 
-    So, give your car the care it deserves—it’ll reward you with comfort and pride every time you hit the road.',
-    'https://scontent.fkul6-4.fna.fbcdn.net/v/t39.30808-6/272961911_1130926530814523_8234750432626552610_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeFy7BBj4u4Ezb4jHS6bxPPnpdSpmJLbzNCl1KmYktvM0NWhxTuesxvj5bp6kMXqfScObD4znrJ8HsGGhrS3uPNs&_nc_ohc=sT2RnmYDvuEQ7kNvgGRK4a-&_nc_zt=23&_nc_ht=scontent.fkul6-4.fna&_nc_gid=ApVZIclA7pbKS2UEv5m3g3M&oh=00_AYBrQQkjk91EQi393m5Gp0lvr_p4jqdb9uvuZ1NQbQoQ0w&oe=672AF4D6')}">
+  <section th:replace="~{fragments/formheader.html :: formheader('Car Cushion Cleaning','Your car cushions deserve the same attention as your engine or tires. 
+  Over time, they collect dirt, spills, and bacteria, turning your vehicle into a less-than-ideal space. 
+  Treat your car to a cushion deep cleaning service to restore its fresh and inviting feel. 
+  Not only does it enhance the aesthetics, but it also improves the overall hygiene of your car, providing a healthier environment for you and your passengers. Regular deep cleaning prevents wear and tear, preserving your car’s interior and boosting its resale value. 
+  Don’t settle for a lackluster ride—invest in a deep cleaning service today and drive in comfort and style.',
+    'https://scontent.fkul6-3.fna.fbcdn.net/v/t39.30808-6/273032597_1130911860815990_3377930435324865937_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeGnkUawmITSybGJFZb_Nx373yvf-wVf1sPfK9_7BV_Ww2WtBx4O81CBk5WldVC0WOdorGI_ZKEgzTZT-Efp5HRN&_nc_ohc=bcdGxzZ7tAMQ7kNvgF7QbBQ&_nc_zt=23&_nc_ht=scontent.fkul6-3.fna&_nc_gid=AfbfTCTiqtsAJ_knI0molTI&oh=00_AYA_M53_LQKgQcNs3iARbuVa6QHK18UPjJVtQNEwnMyqmw&oe=672AFCDE')}">
   </section>
   <section>
     <div class="page-header min-vh-100">
@@ -105,7 +106,7 @@
               <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
                 <div class="bg-gradient-primary shadow-primary border-radius-lg p-3">
                   <h3 class="text-white text-primary mb-0">
-                    Interior Cleaning
+                    Car Cushion Cleaning
                   </h3>
                 </div>
               </div>
@@ -127,7 +128,7 @@
                           <label>Select car type:</label>
                           <div class="dropdown">
                             <select class="btn btn-outline-secondary dropdown-toggle" id="carlist" name="carlist"
-                              aria-expanded="false" onchange="getData()">
+                              aria-expanded="false" >
                               <option value="0">Small</option>
                               <option value="1">Compact</option>
                               <option value="2">Sedan</option>
@@ -145,21 +146,18 @@
                     <div class="row">
                       <div class="col-md-6">
                         <div class="input-group input-group-static input-group-outline mb-4">
-                          <label>Select package:</label>
-                          <div class="dropdown">
-                            <label for="packagelist"></label><select class="btn btn-outline-secondary dropdown-toggle"
-                              id="packagelist" name="packagelist" aria-expanded="false"
-                              onchange="getData();changeImage();">
-                              <option value="0">Package A</option>
-                              <option value="1">Package B</option>
-                              <option value="2">Full Interior</option>
-                              <option value="3">Advance Full</option>
-                            </select>
+                          <label>No of seats:</label>
+                          
+                            <div class="input-group input-group-outline">
+                              <input name="quantity" class="form-control" type="number"
+                                     value="1" aria-valuemin="1" aria-valuemax="5"
+                                     />
+                            </div>
                             <script>
                               var selectedIndex;
                               async function getData() {
                                 let data = await fetch(
-                                  "/interior_packages"
+                                  "/car_seats"
                                 )
                                   .then((response) => {
                                     if (!response.ok) {
@@ -174,37 +172,13 @@
                                   });
                                 //get list of packages
                                 console.log(data);
-                                const packageList = [];
-                                for (var i in data) {
-                                  packageList.push([i, data[i].packageName]);
-                                }
-                                var packageindex =
-                                  document.getElementById(
-                                    "packagelist"
-                                  ).value;
-                                var carindex =
-                                  document.getElementById("carlist").value;
-                                // console.log("package index: ",packageindex)
-                                // console.log("car index: ",carindex)
-
-                                var selectedprice =
-                                  data[packageindex].carList[carindex].rate;
-                                var cardesc =
-                                  data[packageindex].carList[carindex]
-                                    .typedesc;
-                                // console.log(data[packageindex].carList[carindex].rate)
+                                
                                 document.getElementById("price").innerHTML =
                                   "RM" + selectedprice;
                                 document.getElementById(
                                   "cardescription"
                                 ).innerHTML = cardesc;
-                                document.getElementById(
-                                  "packageprice"
-                                ).value = selectedprice;
-                                document.getElementById("pkgname").value =
-                                  data[packageindex].packageName;
-                                document.getElementById("carname").value =
-                                  data[packageindex].carList[carindex].type;
+
                               }
 
                               function changeImage() {
@@ -233,7 +207,7 @@
                               }
 
                             </script>
-                          </div>
+                          
                         </div>
                       </div>
                     </div>
