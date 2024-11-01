@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class IndexController {
 
-    @GetMapping
+    @GetMapping({"/", "/home", "/index"})
     String index(){
         return "index";
     }
@@ -16,5 +16,6 @@ public class IndexController {
     public static String interiorPage(){
         return "interiorpackages";
     }
+
 
 }

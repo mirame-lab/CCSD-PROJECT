@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+  <head>
+    <title>User Registration and Login</title>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <!-- Show Profile and Logout to authenticated users only -->
+        <li sec:authorize="isAuthenticated()">
+          <a th:href="@{/profile}">Profile</a>
+        </li>
+        <li sec:authorize="isAuthenticated()">
+          <a th:href="@{/logout}">Logout</a>
+        </li>
+
+        <!-- Show Login and Register to unauthenticated users only -->
+        <li sec:authorize="isAnonymous()">
+          <a th:href="@{/login}">Login</a>
+        </li>
+        <li sec:authorize="isAnonymous()">
+          <a th:href="@{/register}">Register</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Registration Form -->
+    <h2>Register</h2>
+    <form th:action="@{/register}" th:object="${user}" method="post">
+      <!-- Username Field -->
+      <div>
+        <label for="username">Username:</label>
+        <input
+          type="text"
+          id="username"
+          th:field="*{username}"
+          placeholder="Enter your username"
+          required />
+        <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}">
+          Username Error
+        </div>
+      </div>
+
+      <!-- Password Field -->
+      <div>
+        <label for="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          th:field="*{password}"
+          placeholder="Enter your password"
+          required />
+        <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
+          Password Error
+        </div>
+      </div>
+
+      <!-- Email Field -->
+      <div>
+        <label for="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          th:field="*{email}"
+          placeholder="Enter your email"
+          required />
+        <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
+          Email Error
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit">Register</button>
+    </form>
+
+    <!-- Login Form -->
+    <h2>Login</h2>
+    <form th:action="@{/login}" method="post">
+      <!-- Username Field -->
+      <div>
+        <label for="login-username">Username:</label>
+        <input
+          type="text"
+          id="login-username"
+          name="username"
+          placeholder="Enter your username"
+          required />
+      </div>
+
+      <!-- Password Field -->
+      <div>
+        <label for="login-password">Password:</label>
+        <input
+          type="password"
+          id="login-password"
+          name="password"
+          placeholder="Enter your password"
+          required />
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit">Login</button>
+    </form>
+  </body>
+</html>
