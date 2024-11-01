@@ -1,0 +1,40 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+</head>
+
+<body>
+    <section th:fragment="formheader(serviceText,descText,imgsrc)">
+        <header class="bg-">
+            <div class="page-header min-vh-75">
+
+                <div class="container">
+                    <div class="row">
+                        <!-- description -->
+                        <div class="col-lg-8">
+                            <!-- service name -->
+                            <div class="row mt-lg-3 pt-lg-5">
+                                <h3 th:text=${serviceText}></h3>
+                            </div>
+                            <!-- description -->
+                            <div class="row">
+                                <p th:text=${descText}></p>
+                            </div>
+                        </div>
+                        <!-- gallery -->
+                        <div class="col-lg-4">
+                            <div class="image-wrapper">
+                                <img th:src="${imgsrc}"
+                                    class="img-fluid" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+    </section>
+</body>
+
+</html>

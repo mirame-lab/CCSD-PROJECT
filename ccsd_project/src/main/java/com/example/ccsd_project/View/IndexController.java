@@ -22,5 +22,15 @@ public class IndexController {
         return "fragments/navbar";
     }
 
+    @GetMapping("/footer")
+    String footer(){
+        return "fragments/footer";
+    }
+
+    @GetMapping("/formheader")
+    String formheader(){
+        return "fragments/formheader";
+    }
+
 
 }
