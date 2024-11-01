@@ -1,21 +1,19 @@
 package com.example.ccsd_project.Controller;
 
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.service.annotation.PutExchange;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import netscape.javascript.JSObject;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.ccsd_project.Model.OrderPackage.Cart;
 import com.example.ccsd_project.Model.OrderPackage.Order;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
-import org.springframework.web.bind.annotation.PutMapping;
-
-@RestController
+@Controller
 public class OrderController {
 
     ArrayList<Order> db = new ArrayList<Order>();
@@ -23,33 +21,36 @@ public class OrderController {
 
     
     
-    @PostMapping("/order/")
-    public void createInteriorPackageItem(@RequestBody String body,
-    @RequestParam("servicename") String service,@RequestParam("pkgname") String pkg,@RequestParam("carname") String car,
-    @RequestParam("packageprice") double price) {
+    @PostMapping("/interiorpackages")
+    public String createInteriorPackageItem(@RequestBody String body,
+                                          @RequestParam("servicename") String service, @RequestParam("pkgname") String pkg, @RequestParam("carname") String car,
+                                          @RequestParam("packageprice") double price, RedirectAttributes redirectAttributes) {
         String id = UUID.randomUUID().toString();
         cart.add(new Cart(id,service,pkg,car,price));
-        
+        redirectAttributes.addFlashAttribute("submitted", true);
+        return "redirect:/interiorpackages";
     }
     
-    @GetMapping("/order/")
-    public List<Cart> getCart(){
-        return cart;
+    @GetMapping("/order")
+    public String getCart(Model model){
+        model.addAttribute("cart",cart);
+        return "order";
     }
 
     @PutMapping("/order/{id}")
-    public String updateItemQty(@PathVariable String id,@RequestBody String body){ //@RequestParam("quantity") int qty 
+    public String updateItemQty(Model model,@PathVariable String id, @RequestBody Cart body){  //
         Optional<Cart> item =
         cart.stream()
         .filter(n -> n.getId().equals(id))
         .findFirst();
-
-        // if (item.isPresent()) {
-        //     Cart citem = item.get();
-        //     citem.setQuantity(qty);
-        //     citem.setPrice(citem.getPrice()*citem.getQuantity());// Modify the variable
-        // }
-        return body;
+        System.out.println(body.getQuantity());
+//         if (item.isPresent()) {
+//             Cart citem = item.get();
+//             citem.setQuantity(Integer.parseInt(body));
+//             // Modify the variable
+//         }
+        model.addAttribute("cart",cart);
+        return "order";
     }
 
 
