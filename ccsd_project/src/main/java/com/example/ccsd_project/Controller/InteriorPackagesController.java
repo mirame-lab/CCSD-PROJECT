@@ -1,5 +1,6 @@
 package com.example.ccsd_project.Controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -12,11 +13,13 @@ import com.example.ccsd_project.Model.ServicePackage.InteriorPackages;
 @RestController
 public class InteriorPackagesController {
 
+    ArrayList<Car> cars = new CarController().carList;
+
     List<InteriorPackages> db = Arrays.asList(
-            new InteriorPackages("Package A", "Car cushion + floor panel cleaning.", 2),
-            new InteriorPackages("Package B", "Car cushion + floor panel + roof panel cleaning.", 3),
-            new InteriorPackages("Full Interior","Car cushion + floor panel + door panel + dashboard + boot + cleaning.", 4),
-            new InteriorPackages("Advance Full","Detach seats and floor carpet. Suitable for old cars aging 5 years above", 2)
+            new InteriorPackages("Package A", "Car cushion + floor panel cleaning.", 2,cars),
+            new InteriorPackages("Package B", "Car cushion + floor panel + roof panel cleaning.", 3,cars),
+            new InteriorPackages("Full Interior","Car cushion + floor panel + door panel + dashboard + boot + cleaning.", 4,cars),
+            new InteriorPackages("Advance Full","Detach seats and floor carpet. Suitable for old cars aging 5 years above", 2,cars)
             );
 
     @GetMapping("/interior_packages")
