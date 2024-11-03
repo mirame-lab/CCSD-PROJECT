@@ -1,22 +1,27 @@
 package com.example.ccsd_project.Controller;
 
-import netscape.javascript.JSObject;
-import org.springframework.http.ResponseEntity;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.ccsd_project.Model.OrderPackage.Cart;
 import com.example.ccsd_project.Model.OrderPackage.Order;
 
-import java.lang.reflect.Array;
-import java.util.*;
-
 @Controller
 public class OrderController {
 
-    ArrayList<Order> db = new ArrayList<Order>();
+    List<Order> db = new ArrayList<>();
     List<Cart> cart = new ArrayList<>();
 
     @PostMapping("/interiorpackages")
@@ -48,8 +53,16 @@ public class OrderController {
         return "order";
     }
 
-    // @PostMapping("/order")
-    
+    @PostMapping("/order")
+    public String createOrder(
+        Model model
+    ){
+        String orderID = "order#"+ UUID.randomUUID().toString();
+        Order newOrder = new Order(orderID, cart);
+        db.add(newOrder); //create new order pending payment
+        model.addAttribute("order", db);
+        return "checkout";
+    }
 
     @PutMapping("/order/{id}")
     public String updateItemQty(Model model, @PathVariable String id, @RequestBody Cart body) { //

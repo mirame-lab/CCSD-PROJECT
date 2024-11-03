@@ -74,48 +74,50 @@
           <!-- START Cart item section --><!-- Action is PUT since edit cart item -->
 
 
-            <div id="ordercontainer" class="item col-lg-8 col-6">
-              <th:block th:each="item : ${cart}">
-                <div id="orderitem" class="row-lg-12 pb-4 p-3">
-                  <div class="row-lg-12"> <!--service name -->
-                    <h5 id="service" th:text="${item.service}"></h5>
-                    <input type="hidden" id="itemID" th:value="${item.id}">
-                  </div>
-                  <div class="row-lg-12"> <!--service details -->
-                    <div class="row">
-                      <div class="col-md-3">
-                        <span id="classification" class="text-dark pt-1 mb-0" th:text="${item.classification}"></span>
-                      </div>
-                      <div class="col-md-3">
-                        <span>Car type: </span><br>
-                        <span id="type" th:text="${item.type}"></span>
-                      </div>
-                      <div class="col-lg-1">
-                        <div class="input-group input-group-outline">
-                          <input name="quantity" class="form-control" type="number"
-                                 value="1" aria-valuemin="1" aria-valuemax="50"
-                                 th:value="${item.quantity}" disabled/>
-                        </div>
-                      </div>
-                      <div class="col-md-4 text-center">
-                        <h6 id="price" th:text="'RM'+ ${item.calculatePrice()}"></h6>
-                      </div>
-                      <div class="col-1">
-                        <a href=""><i class="fas fa-times"></i> </a>
+          <div id="ordercontainer" class="item col-lg-8 col-6">
+            <th:block th:each="item : ${cart}">
+              <div id="orderitem" class="row-lg-12 pb-4 p-3">
+                <div class="row-lg-12"> <!--service name -->
+                  <h5 id="service" th:text="${item.service}"></h5>
+                  <input type="hidden" id="itemID" th:value="${item.id}">
+                </div>
+                <div class="row-lg-12"> <!--service details -->
+                  <div class="row">
+                    <div class="col-md-3">
+                      <span id="classification" class="text-dark pt-1 mb-0" th:text="${item.classification}"></span>
+                    </div>
+                    <div class="col-md-3">
+                      <span>Car type: </span><br>
+                      <span id="type" th:text="${item.type}"></span>
+                    </div>
+                    <div class="col-lg-1">
+                      <div class="input-group input-group-outline">
+                        <input name="quantity" class="form-control" type="number" value="1" aria-valuemin="1"
+                          aria-valuemax="50" th:value="${item.quantity}" disabled />
                       </div>
                     </div>
+                    <div class="col-md-4 text-center">
+                      <h6 id="price" th:text="'RM'+ ${item.calculatePrice()}"></h6>
+                    </div>
+                    <div class="col-1">
+                      <a href=""><i class="fas fa-times"></i> </a>
+                    </div>
                   </div>
-                  <hr style="display:block; background: linear-gradient(to right, white, gray, white);">
                 </div>
-              </th:block>
+                <hr style="display:block; background: linear-gradient(to right, white, gray, white);">
+              </div>
+            </th:block>
 
-            </div>
+          </div>
 
 
           <!-- END Cart item section -->
           <div class="col-lg-4">
             <div class="card card-frame bg-gray-200">
               <div class="card-body"><!-- Action is POST since create new order -->
+                <form 
+                method="post"
+                action="/order">
                   <div class="row pb-4">
                     <h5>Order Summary</h5>
                   </div>
@@ -155,70 +157,70 @@
                   <div class="row">
                     <button type="submit" class="btn btn-outline-dark w-100 bg-white">Continue Shopping</button>
                   </div>
+                </form>
               </div>
             </div>
           </div>
         </div>
       </div>
       <script th:inline="javascript">
+
+
+          var subtotal = document.getElementById("subtotalVal").value;
+          var fee = document.getElementById("feeVal").value;
+
+          document.getElementById("total").innerHTML = subtotal + fee;
         
-          calculateTotal();
-          function calculateTotal(){
-            var subtotal = document.getElementById("subtotalVal").value;
-            var fee = document.getElementById("feeVal").value;
+        // function changeQty(val, id, item) {
+          //              const updatedValue = parseInt(value); // Get the new input value
+          // console.log(item);
+          //              const data = {
+          //                  id: "",
+          //                  quantity: updatedValue,
+          //                  service: "",
+          //                  classification:"",
+          //                  price: 0,
+          //                  type: ""
+          //              };
 
-            document.getElementById("total").innerHTML = subtotal + fee;
-          }
-          function changeQty(val,id,item){
-//              const updatedValue = parseInt(value); // Get the new input value
-              console.log(item);
-//              const data = {
-//                  id: "",
-//                  quantity: updatedValue,
-//                  service: "",
-//                  classification:"",
-//                  price: 0,
-//                  type: ""
-//              };
+        // }
 
-          }
-
-          //
-          //        document.getElementById("quantity").addEventListener("change", async function (event) {
-          //          event.preventDefault()
-          //            const updatedValue = parseInt(event.target.value); // Get the new input value
-          //            console.log((typeof updatedValue) + updatedValue);
-          //            const data = {
-          //              id: "",
-          //              quantity: updatedValue,
-          //              service: "",
-          //              classification:"",
-          //              price: 0,
-          //              type: ""
-          //            }; // update quantity
-          //            const id = document.querySelector('#itemID').value
-          //          const variableFromController = /*[[${cart}]]*/
-          //            console.log(variableFromController);
-          //            try {
-          //              const response = await fetch('/order/${id}', {
-          //          method: 'PUT',
-          //          headers: {
-          //            'Content-Type': 'application/json'
-          //          },
-          //          body: data
-          //
-          //        });
-          //
-          //        if (response.ok) {
-          //          const result = await response.json();
-          //          console.log('Update successful:', result);
-          //        } else {
-          //          console.error('Update failed:', response.status);
-          //        }
-          //        } catch (error) {
-          //        console.error('Request error:', error);
-          //        }
-          //        });
+        //
+        //        document.getElementById("quantity").addEventListener("change", async function (event) {
+        //          event.preventDefault()
+        //            const updatedValue = parseInt(event.target.value); // Get the new input value
+        //            console.log((typeof updatedValue) + updatedValue);
+        //            const data = {
+        //              id: "",
+        //              quantity: updatedValue,
+        //              service: "",
+        //              classification:"",
+        //              price: 0,
+        //              type: ""
+        //            }; // update quantity
+        //            const id = document.querySelector('#itemID').value
+        //          const variableFromController = /*[[${cart}]]*/
+        //            console.log(variableFromController);
+        //            try {
+        //              const response = await fetch('/order/${id}', {
+        //          method: 'PUT',
+        //          headers: {
+        //            'Content-Type': 'application/json'
+        //          },
+        //          body: data
+        //
+        //        });
+        //
+        //        if (response.ok) {
+        //          const result = await response.json();
+        //          console.log('Update successful:', result);
+        //        } else {
+        //          console.error('Update failed:', response.status);
+        //        }
+        //        } catch (error) {
+        //        console.error('Request error:', error);
+        //        }
+        //        });
       </script>
     </section>
 
