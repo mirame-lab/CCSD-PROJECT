@@ -2,7 +2,6 @@ package com.example.ccsd_project.View;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 
@@ -14,10 +13,6 @@ public class IndexController {
         return "index";
     }
 
-    @GetMapping("/interiorpackages")
-    public static String interiorPage(){
-        return "interiorpackages";
-    }
 
     @GetMapping("/navbar")
     String navbar(){

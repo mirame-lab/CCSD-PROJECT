@@ -124,8 +124,8 @@
                       <span>Subtotal</span>
                     </div>
                     <div class="col-4 text-end">
-                      <span id="subtotal">RM 180</span>
-                      <input id="subtotalVal" type="hidden" value="">
+                      <span id="subtotal" th:text="'RM'+ ${subtotal}"></span>
+                      <input id="subtotalVal" type="hidden" th:value="${subtotal}">
                     </div>
 
                   </div>
@@ -136,7 +136,7 @@
                     </div>
                     <div class="col-4 text-end">
                       <span id="fee">RM 0</span>
-                      <input id="feeVal" type="hidden" value="">
+                      <input id="feeVal" type="hidden" value="0">
                     </div>
                   </div>
                   <hr style="display:block; background: linear-gradient(to right, white, gray, white);">
@@ -145,7 +145,7 @@
                       <h5>Total</h5>
                     </div>
                     <div class="col-4 text-end">
-                      <h5 id="total">RM 180</h5>
+                      <h5 id="total"></h5>
                       <input id="totalVal" type="hidden" value="">
                     </div>
                   </div>
@@ -162,6 +162,13 @@
       </div>
       <script th:inline="javascript">
         
+          calculateTotal();
+          function calculateTotal(){
+            var subtotal = document.getElementById("subtotalVal").value;
+            var fee = document.getElementById("feeVal").value;
+
+            document.getElementById("total").innerHTML = subtotal + fee;
+          }
           function changeQty(val,id,item){
 //              const updatedValue = parseInt(value); // Get the new input value
               console.log(item);

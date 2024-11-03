@@ -82,7 +82,8 @@
     </div>
   </div>
   <!-- header with description -->
-  <section th:replace="~{fragments/formheader.html :: formheader('Interior Cleaning','Imagine stepping into a spotless, fresh car interior. A clean car isn’t just about looks—it creates a comfortable, healthy environment for every journey. 
+  <section
+    th:replace="~{fragments/formheader.html :: formheader('Interior Cleaning','Imagine stepping into a spotless, fresh car interior. A clean car isn’t just about looks—it creates a comfortable, healthy environment for every journey. 
     First impressions matter; a clean interior shows pride in ownership. It also helps keep dust, allergens, and bacteria at bay, ensuring a healthier space for you and your passengers. Routine cleaning maintains your car’s seats, carpets, 
     and dashboard, preventing wear and tear. Plus, a tidy car reduces stress and makes driving more enjoyable. 
     So, give your car the care it deserves—it’ll reward you with comfort and pride every time you hit the road.',
@@ -127,7 +128,7 @@
                           <label>Select car type:</label>
                           <div class="dropdown">
                             <select class="btn btn-outline-secondary dropdown-toggle" id="carlist" name="carlist"
-                              aria-expanded="false" onchange="getData()">
+                              aria-expanded="false" onchange="getPrice()">
                               <option value="0">Small</option>
                               <option value="1">Compact</option>
                               <option value="2">Sedan</option>
@@ -149,64 +150,34 @@
                           <div class="dropdown">
                             <label for="packagelist"></label><select class="btn btn-outline-secondary dropdown-toggle"
                               id="packagelist" name="packagelist" aria-expanded="false"
-                              onchange="getData();changeImage();">
+                              onchange="getPrice();changeImage();">
                               <option value="0">Package A</option>
                               <option value="1">Package B</option>
                               <option value="2">Full Interior</option>
                               <option value="3">Advance Full</option>
                             </select>
-                            <script>
-                              var selectedIndex;
-                              async function getData() {
-                                let data = await fetch(
-                                  "/interior_packages"
-                                )
-                                  .then((response) => {
-                                    if (!response.ok) {
-                                      throw new Error(
-                                        "Network response was not ok"
-                                      );
-                                    }
-                                    return response.json();
-                                  })
-                                  .catch((error) => {
-                                    console.error("Error:", error);
-                                  });
-                                //get list of packages
-                                console.log(data);
-                                const packageList = [];
-                                for (var i in data) {
-                                  packageList.push([i, data[i].packageName]);
-                                }
-                                var packageindex =
-                                  document.getElementById(
-                                    "packagelist"
-                                  ).value;
-                                var carindex =
-                                  document.getElementById("carlist").value;
-                                // console.log("package index: ",packageindex)
-                                // console.log("car index: ",carindex)
+                            <script th:inline="javascript">
+                              /*<![CDATA[*/
+                              var cars = /*[[${cars}]]*/ "default";
+                              var carpackages = /*[[${carpackages}]]*/ "default";
+                              console.log("Thymeleaf Variable in JS:", cars);
+                              console.log("Thymeleaf Variable in JS:", carpackages);
+                              /*]]>*/
+                              getPrice()
+                              function getPrice() {
 
-                                var selectedprice =
-                                  data[packageindex].carList[carindex].rate;
-                                var cardesc =
-                                  data[packageindex].carList[carindex]
-                                    .typedesc;
-                                // console.log(data[packageindex].carList[carindex].rate)
-                                document.getElementById("price").innerHTML =
-                                  "RM" + selectedprice;
-                                document.getElementById(
-                                  "cardescription"
-                                ).innerHTML = cardesc;
-                                document.getElementById(
-                                  "packageprice"
-                                ).value = selectedprice;
-                                document.getElementById("pkgname").value =
-                                  data[packageindex].packageName;
-                                document.getElementById("carname").value =
-                                  data[packageindex].carList[carindex].type;
+                                var index = document.getElementById("carlist").value;
+                                var pIndex = document.getElementById("packagelist").value;
+                                console.log("car index:", index);
+
+                                var selectedCarDesc = cars[index].typedesc;
+                                document.getElementById("price").innerHTML = "RM" + carpackages[pIndex].carList[index].rate ;
+                                document.getElementById("cardescription").innerHTML = selectedCarDesc;
+                                //set hidden input values
+                                document.getElementById("packageprice").value = carpackages[pIndex].carList[index].rate;
+                                document.getElementById("pkgname").value = carpackages[pIndex].packageName;
+                                document.getElementById("carname").value = cars[index].type;
                               }
-
                               function changeImage() {
                                 var url;
                                 var currentPkgVal =

@@ -4,28 +4,31 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.example.ccsd_project.Model.ServicePackage.Car;
 import com.example.ccsd_project.Model.ServicePackage.InteriorPackages;
 
-@RestController
+@Controller
 public class InteriorPackagesController {
 
     ArrayList<Car> cars = new CarController().carList;
 
     List<InteriorPackages> db = Arrays.asList(
-            new InteriorPackages("Package A", "Car cushion + floor panel cleaning.", 2,cars),
-            new InteriorPackages("Package B", "Car cushion + floor panel + roof panel cleaning.", 3,cars),
-            new InteriorPackages("Full Interior","Car cushion + floor panel + door panel + dashboard + boot + cleaning.", 4,cars),
-            new InteriorPackages("Advance Full","Detach seats and floor carpet. Suitable for old cars aging 5 years above", 2,cars)
+            new InteriorPackages("Package A", "Car cushion + floor panel cleaning.", 2,new CarController().carList),
+            new InteriorPackages("Package B", "Car cushion + floor panel + roof panel cleaning.", 3,new CarController().carList),
+            new InteriorPackages("Full Interior","Car cushion + floor panel + door panel + dashboard + boot + cleaning.", 4,new CarController().carList),
+            new InteriorPackages("Advance Full","Detach seats and floor carpet. Suitable for old cars aging 5 years above", 2,new CarController().carList)
             );
 
-    @GetMapping("/interior_packages")
-    public List<InteriorPackages> get() {
+    @GetMapping("/interiorpackages")
+    public String get(Model model) {
         setPriceAllPackages();
-        return db;
+        model.addAttribute("cars", cars);
+        model.addAttribute("carpackages", db);
+        return "interiorpackages";
     }
 
     //function utk senangkan hidup saya

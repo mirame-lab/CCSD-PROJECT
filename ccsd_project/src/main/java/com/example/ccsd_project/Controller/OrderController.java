@@ -44,8 +44,12 @@ public class OrderController {
     @GetMapping("/order")
     public String getCart(Model model) {
         model.addAttribute("cart", cart);
+        model.addAttribute("subtotal",calculateSubTotal());
         return "order";
     }
+
+    // @PostMapping("/order")
+    
 
     @PutMapping("/order/{id}")
     public String updateItemQty(Model model, @PathVariable String id, @RequestBody Cart body) { //
@@ -61,5 +65,12 @@ public class OrderController {
         model.addAttribute("cart", cart);
         return "order";
     }
+
+
+    public double calculateSubTotal(){
+        final double[] sum = {0};
+        cart.forEach(n-> sum[0]+=n.calculatePrice());
+            return sum[0];
+       }
 
 }
