@@ -179,8 +179,8 @@
                   </p>
                   <form
                     id="interiorpackage-form"
-                    method=""
-                    action="/"
+                    method="post"
+                    action="/carseats"
                   >
                     <div class="card-body p-0 my-3">
                       <div class="row">
@@ -204,7 +204,7 @@
                               id="pkgname"
                               name="pkgname"
                               type="hidden"
-                              value="Package A"
+                              value=""
                             />
                             <input
                               id="carname"
@@ -279,6 +279,10 @@
                                var selectedCarDesc = cars[index].typedesc;
                                document.getElementById("price").innerHTML = "RM" + (selectedCarRate*nSeats);
                                document.getElementById("cardescription").innerHTML = selectedCarDesc;
+                               //set hidden input values
+                               document.getElementById("packageprice").value = selectedCarRate*nSeats;
+                               document.getElementById("pkgname").value = nSeats + " seats";
+                               document.getElementById("carname").value = cars[index].type;
                               }
 
                             </script>

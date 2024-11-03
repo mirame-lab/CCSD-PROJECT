@@ -19,41 +19,47 @@ public class OrderController {
     ArrayList<Order> db = new ArrayList<Order>();
     List<Cart> cart = new ArrayList<>();
 
-    
-    
     @PostMapping("/interiorpackages")
     public String createInteriorPackageItem(@RequestBody String body,
-                                          @RequestParam("servicename") String service, @RequestParam("pkgname") String pkg, @RequestParam("carname") String car,
-                                          @RequestParam("packageprice") double price, RedirectAttributes redirectAttributes) {
+            @RequestParam("servicename") String service, @RequestParam("pkgname") String pkg,
+            @RequestParam("carname") String car,
+            @RequestParam("packageprice") double price, RedirectAttributes redirectAttributes) {
         String id = UUID.randomUUID().toString();
-        cart.add(new Cart(id,service,pkg,car,price));
+        cart.add(new Cart(id, service, pkg, car, price));
         redirectAttributes.addFlashAttribute("submitted", true);
         return "redirect:/interiorpackages";
     }
 
-    
-    
+    @PostMapping("/carseats")
+    public String createCarSeatItem(@RequestBody String body,
+            @RequestParam("servicename") String service, @RequestParam("pkgname") String pkg,
+            @RequestParam("carname") String car,
+            @RequestParam("packageprice") double price, RedirectAttributes redirectAttributes) {
+        String id = UUID.randomUUID().toString();
+        cart.add(new Cart(id, service, pkg, car, price));
+        redirectAttributes.addFlashAttribute("submitted", true);
+        return "redirect:/carseats";
+    }
+
     @GetMapping("/order")
-    public String getCart(Model model){
-        model.addAttribute("cart",cart);
+    public String getCart(Model model) {
+        model.addAttribute("cart", cart);
         return "order";
     }
 
     @PutMapping("/order/{id}")
-    public String updateItemQty(Model model,@PathVariable String id, @RequestBody Cart body){  //
-        Optional<Cart> item =
-        cart.stream()
-        .filter(n -> n.getId().equals(id))
-        .findFirst();
+    public String updateItemQty(Model model, @PathVariable String id, @RequestBody Cart body) { //
+        Optional<Cart> item = cart.stream()
+                .filter(n -> n.getId().equals(id))
+                .findFirst();
         System.out.println(body.getQuantity());
-//         if (item.isPresent()) {
-//             Cart citem = item.get();
-//             citem.setQuantity(Integer.parseInt(body));
-//             // Modify the variable
-//         }
-        model.addAttribute("cart",cart);
+        // if (item.isPresent()) {
+        // Cart citem = item.get();
+        // citem.setQuantity(Integer.parseInt(body));
+        // // Modify the variable
+        // }
+        model.addAttribute("cart", cart);
         return "order";
     }
-
 
 }
