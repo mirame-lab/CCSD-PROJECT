@@ -2,6 +2,7 @@ package com.example.ccsd_project.Model.ServicePackage;
 
 public class CarSeats extends Services {
     private int seatNum;
+
     public String carType;
 
     public CarSeats(){
@@ -14,7 +15,9 @@ public class CarSeats extends Services {
         super.setRate(rate);
         this.carType = carType;
     }
-
+    public void setSeatNum(int seatNum) {
+        this.seatNum = seatNum;
+    }
     public void setDuration(int seatNum){ super.setDuration(seatNum*0.5);}//assume 1 seat = 30 min
     public double calculatePrice(int seatNum) {
         return seatNum*getRate();

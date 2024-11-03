@@ -29,6 +29,7 @@
       .vrmedia-gallery img {
         object-fit: cover;
         width: 100%;
+        height: 100%;
       }
       .vrmedia-gallery .lSGallery {
         display: inline-flex;
@@ -53,27 +54,7 @@
           <img th:src="${url}" />
         </li>
       </ul>
-      <script th:inline="javascript">
-        // // Function to generate <li> elements
-        // function generateGallery() {
-        //   var gallery = document.getElementById("gallery");
-        //   imageUrls.forEach(function (url) {
-        //     var li = document.createElement("li");
-        //     li.setAttribute("data-fancybox", "gallery");
-        //     li.setAttribute("data-src", url);
-        //     li.setAttribute("data-thumb", url);
-
-        //     var img = document.createElement("img");
-        //     img.src = url;
-
-        //     li.appendChild(img);
-        //     gallery.appendChild(li);
-        //   });
-        // }
-
-        // // Call the function to generate the gallery
-        // generateGallery();
-
+      <script th:inline="javascript">   
         // Initialize lightSlider
         $(document).ready(function () {
           $("#gallery").lightSlider({
