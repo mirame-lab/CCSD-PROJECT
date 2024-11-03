@@ -30,6 +30,7 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .anyRequest().permitAll() // Allow access to all routes without authentication
             )
+            .csrf(csrf->csrf.disable())
             .formLogin(form -> form
                 .loginPage("/login")
                 .permitAll()
@@ -52,5 +53,7 @@ public class SecurityConfig {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
     }
+
+    
 
 }
