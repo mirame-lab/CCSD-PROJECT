@@ -1,7 +1,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightslider/1.1.6/css/lightslider.min.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0.5/dist/fancybox.css" rel="stylesheet" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/lightslider/1.1.6/css/lightslider.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0.5/dist/fancybox.css"
+      rel="stylesheet"
+    />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightslider/1.1.6/js/lightslider.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0.5/dist/fancybox.umd.js"></script>
@@ -36,66 +42,41 @@
     </style>
   </head>
   <body>
-    <div class="vrmedia-gallery" th:fragment="gallery">
-      <ul class="ecommerce-gallery">
+    <div class="vrmedia-gallery" th:fragment="gallery(images)">
+      <ul class="ecommerce-gallery" id="gallery">
         <li
+          th:each="url : ${images}"
           data-fancybox="gallery"
-          data-src="https://via.placeholder.com/1000/2a9d8f/FFFFFF/?text=VRMedia%20Dev"
-          data-thumb="https://via.placeholder.com/567/2a9d8f/FFFFFF/?text=VRMedia%20Dev"
+          th:data-src="${url}"
+          th:data-thumb="${url}"
         >
-          <img
-            src="https://via.placeholder.com/567/2a9d8f/FFFFFF/?text=VRMedia%20Dev"
-          />
-        </li>
-        <li
-          data-fancybox="gallery"
-          data-src="https://via.placeholder.com/1000/0096c7/FFFFFF/?text=VRMedia%20Dev"
-          data-thumb="https://via.placeholder.com/567/0096c7/FFFFFF/?text=VRMedia%20Dev"
-        >
-          <img
-            src="https://via.placeholder.com/567/0096c7/FFFFFF/?text=VRMedia%20Dev"
-          />
-        </li>
-        <li
-          data-fancybox="gallery"
-          data-src="https://via.placeholder.com/1000/ffb703/FFFFFF/?text=VRMedia%20Dev"
-          data-thumb="https://via.placeholder.com/567/ffb703/FFFFFF/?text=VRMedia%20Dev"
-        >
-          <img
-            src="https://via.placeholder.com/567/ffb703/FFFFFF/?text=VRMedia%20Dev"
-          />
-        </li>
-        <li
-          data-fancybox="gallery"
-          data-src="https://via.placeholder.com/1000/d4a373/FFFFFF/?text=VRMedia%20Dev"
-          data-thumb="https://via.placeholder.com/567/d4a373/FFFFFF/?text=VRMedia%20Dev"
-        >
-          <img
-            src="https://via.placeholder.com/567/d4a373/FFFFFF/?text=VRMedia%20Dev"
-          />
-        </li>
-        <li
-          data-fancybox="gallery"
-          data-src="https://via.placeholder.com/1000/ba181b/FFFFFF/?text=VRMedia%20Dev"
-          data-thumb="https://via.placeholder.com/567/ba181b/FFFFFF/?text=VRMedia%20Dev"
-        >
-          <img
-            src="https://via.placeholder.com/567/ba181b/FFFFFF/?text=VRMedia%20Dev"
-          />
-        </li>
-        <li
-          data-fancybox="gallery"
-          data-src="https://via.placeholder.com/1000/89b0ae/FFFFFF/?text=VRMedia%20Dev"
-          data-thumb="https://via.placeholder.com/567/89b0ae/FFFFFF/?text=VRMedia%20Dev"
-        >
-          <img
-            src="https://via.placeholder.com/567/89b0ae/FFFFFF/?text=VRMedia%20Dev"
-          />
+          <img th:src="${url}" />
         </li>
       </ul>
       <script th:inline="javascript">
-        jQuery(document).ready(function () {
-          jQuery(".ecommerce-gallery").lightSlider({
+        // // Function to generate <li> elements
+        // function generateGallery() {
+        //   var gallery = document.getElementById("gallery");
+        //   imageUrls.forEach(function (url) {
+        //     var li = document.createElement("li");
+        //     li.setAttribute("data-fancybox", "gallery");
+        //     li.setAttribute("data-src", url);
+        //     li.setAttribute("data-thumb", url);
+
+        //     var img = document.createElement("img");
+        //     img.src = url;
+
+        //     li.appendChild(img);
+        //     gallery.appendChild(li);
+        //   });
+        // }
+
+        // // Call the function to generate the gallery
+        // generateGallery();
+
+        // Initialize lightSlider
+        $(document).ready(function () {
+          $("#gallery").lightSlider({
             gallery: true,
             item: 1,
             loop: true,
@@ -105,6 +86,5 @@
         });
       </script>
     </div>
-
   </body>
 </html>
