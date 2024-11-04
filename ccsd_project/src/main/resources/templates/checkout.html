@@ -47,15 +47,25 @@
     <div class="page-header min-vh-100">
       <div class="container">
         <div class="row">
-          <div class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 start-0 justify-content-center flex-column" th:include="~{order.html :: cartlist}">
-
+          <div
+            class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-relative top-0 start-0 justify-content-center flex-column"
+            >
+            <div class="row"
+            style="height: 300px; overflow-y: auto;" 
+            th:include="~{order.html :: cartlist}">
+            </div>
+            <div class="row"
+            th:include="~{order.html :: summary}"
+            >
+            </div>
           </div>
+
 
           <div class="col-xl-5 col-lg-6 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
             <div class="card d-flex blur justify-content-center shadow-lg my-sm-0 my-sm-6 mt-8 mb-5">
               <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
                 <div class="bg-gradient-primary shadow-primary border-radius-lg p-3">
-                  <h3 class="text-white text-primary mb-0">Contact us</h3>
+                  <h3 class="text-white text-primary mb-0">Check Out</h3>
                 </div>
               </div>
               <div class="card-body">
@@ -81,17 +91,75 @@
                     </div>
                     <div class="form-group mb-0 mt-md-0 mt-4">
                       <div class="input-group input-group-static mb-4">
-                        <label>How can we help you?</label>
-                        <textarea name="message" class="form-control" id="message" rows="6"
-                          placeholder="Describe your problem in at least 250 characters"></textarea>
+                        <div class="row">
+                          <div class="col-12">
+                            <label>Do you need us to come to you?</label>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-12">
+                            <div class="form-check">
+                              <input class="form-check-input" type="radio" name="helpOptions" id="option1" value="true"
+                                onclick="toggleAddressFields()">
+                              <label class="form-check-label" for="option1">
+                                Yes please!
+                              </label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="radio" name="helpOptions" id="option2" value="false"
+                                onclick="toggleAddressFields()" checked>
+                              <label class="form-check-label" for="option2">
+                                No thank you, I will walk in.
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="addressFields" style="display: none;">
+                        <div class="row">
+                          <div class="col-12 input-group input-group-static mb-4">
+                            <label for="address">Address:</label> <input type="text" class="form-control" id="address"
+                              name="address">
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="input-group input-group-static">
+                              <label for="postcode">Postcode:</label> <input type="text" class="form-control"
+                                id="postcode" name="postcode">
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="input-group input-group-static">
+                              <label for="city">City:</label> <input type="text" class="form-control" id="city"
+                                name="city">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row mt-3">
+                        <div class="col-12 dropdown">
+                          <div class="row">
+                            <label for="paymentType">Payment Type:</label>
+                          </div>
+                          <div class="row">
+                            <div class="col-4 "> <!-- Adjust the column width here --> <select
+                                class="btn btn-outline-secondary dropdown-toggle w-100" id="paymentType"
+                                name="paymentType">
+                                <option value="creditCard">Credit Card</option>
+                                <option value="paypal">PayPal</option>
+                                <option value="bankTransfer">Bank Transfer</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12 text-center">
+                          <button type="submit" class="btn bg-gradient-primary mt-3 mb-0">Proceed payment</button>
+                        </div>
                       </div>
                     </div>
-                    <div class="row">
-                      <div class="col-md-12 text-center">
-                        <button type="submit" class="btn bg-gradient-primary mt-3 mb-0">Send Message</button>
-                      </div>
-                    </div>
-                  </div>
                 </form>
               </div>
             </div>
@@ -101,12 +169,18 @@
     </div>
   </section>
   <!-- -------- END HEADER 8 w/ card over right bg image ------- -->
+  <script th:inline="javascript"> function toggleAddressFields() {
+      var option1 = document.getElementById('option1');
+      var addressFields = document.getElementById('addressFields');
+      if (option1.checked) { addressFields.style.display = 'block'; }
+      else { addressFields.style.display = 'none'; }
+    } </script>
   <script th:inline="javascript">
     /*<![CDATA[*/
     var order = /*[[${order}]]*/ "default";
     console.log("Thymeleaf Variable in JS:", order);
-    console.log("Order cart:", order[0].cart);
-   
+
+
     /*]]>*/
   </script>
   <footer th:replace="~{fragments/footer.html :: footer}">

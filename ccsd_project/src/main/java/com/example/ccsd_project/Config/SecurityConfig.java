@@ -28,6 +28,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
+            // .requestMatchers("/secured-url").authenticated()
                 .anyRequest().permitAll() // Allow access to all routes without authentication
             )
             .csrf(csrf->csrf.disable())

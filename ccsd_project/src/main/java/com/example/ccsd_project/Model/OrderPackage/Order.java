@@ -3,7 +3,7 @@ package com.example.ccsd_project.Model.OrderPackage;
 import java.util.List;
 
 public class Order {
-     private String id, username, address;
+     private String id, email, address;
      private double subtotal,fee;
      private boolean isDeliverable;
      private List<Cart> cart;
@@ -35,12 +35,12 @@ public class Order {
           this.id = id;
      }
 
-     public String getUsername() {
-          return username;
+     public String getEmail() {
+          return email;
      }
 
-     public void setUsername(String username) {
-          this.username = username;
+     public void setEmail(String email) {
+          this.email = email;
      }
 
      public List<Cart> getCart() {

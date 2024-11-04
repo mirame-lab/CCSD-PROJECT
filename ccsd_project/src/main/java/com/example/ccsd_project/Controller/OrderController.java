@@ -60,13 +60,16 @@ public class OrderController {
         model.addAttribute("order", db);
         return "checkout";
     }
+    @PostMapping("/checkout")
+    public String submitOrder(){
+        String orderID = "order#"+ UUID.randomUUID().toString();
+        db.add(new Order(orderID, cart)); 
+        //create new order pending payment
+        return "redirect:/checkout";
+    }
 
     @PostMapping("/order")
-    public String createOrder(
-        Model model
-    ){
-        String orderID = "order#"+ UUID.randomUUID().toString();
-        db.add(new Order(orderID, cart)); //create new order pending payment
+    public String createOrder(Model model){
         return "redirect:/checkout";
     }
 
