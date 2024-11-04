@@ -74,7 +74,7 @@
           <!-- START Cart item section --><!-- Action is PUT since edit cart item -->
 
 
-          <div id="ordercontainer" class="item col-lg-8 col-6">
+          <div id="ordercontainer" class="item col-lg-8 col-6" th:fragment="cartlist">
             <th:block th:each="item : ${cart}">
               <div id="orderitem" class="row-lg-12 pb-4 p-3">
                 <div class="row-lg-12"> <!--service name -->

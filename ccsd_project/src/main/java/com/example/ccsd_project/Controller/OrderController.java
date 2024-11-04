@@ -53,15 +53,21 @@ public class OrderController {
         return "order";
     }
 
+    @GetMapping("/checkout")
+    public String getCheckout(Model model){
+        model.addAttribute("cart", cart);
+        model.addAttribute("subtotal",calculateSubTotal());
+        model.addAttribute("order", db);
+        return "checkout";
+    }
+
     @PostMapping("/order")
     public String createOrder(
         Model model
     ){
         String orderID = "order#"+ UUID.randomUUID().toString();
-        Order newOrder = new Order(orderID, cart);
-        db.add(newOrder); //create new order pending payment
-        model.addAttribute("order", db);
-        return "checkout";
+        db.add(new Order(orderID, cart)); //create new order pending payment
+        return "redirect:/checkout";
     }
 
     @PutMapping("/order/{id}")
