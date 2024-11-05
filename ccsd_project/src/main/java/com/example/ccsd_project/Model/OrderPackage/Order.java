@@ -1,12 +1,15 @@
 package com.example.ccsd_project.Model.OrderPackage;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class Order {
-     private String id, email, address;
+     private String id, email, address,payment;
      private double subtotal,fee;
-     private boolean isDeliverable;
+     private boolean isDeliverable,approved=false;
      private List<Cart> cart;
+     private LocalDateTime bookingTime;
+     private int duration;
 
      public Order(String id, List<Cart> cart) {
           this.id = id;

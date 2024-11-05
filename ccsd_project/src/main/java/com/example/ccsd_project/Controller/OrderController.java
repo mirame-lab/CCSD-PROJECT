@@ -1,5 +1,6 @@
 package com.example.ccsd_project.Controller;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +24,7 @@ public class OrderController {
 
     List<Order> db = new ArrayList<>();
     List<Cart> cart = new ArrayList<>();
+    List<LocalDateTime> bookings = new ArrayList<>();
 
     @PostMapping("/interiorpackages")
     public String createInteriorPackageItem(@RequestBody String body,
@@ -62,6 +64,7 @@ public class OrderController {
     }
     @PostMapping("/checkout")
     public String submitOrder(){
+        //email,address,payment type,datetime get from form
         String orderID = "order#"+ UUID.randomUUID().toString();
         db.add(new Order(orderID, cart)); 
         //create new order pending payment
@@ -94,5 +97,10 @@ public class OrderController {
         cart.forEach(n-> sum[0]+=n.calculatePrice());
             return sum[0];
        }
+    
+    public List<LocalDateTime> getBookedDates(){
+        //get bookingTime from all Orders
+        return bookings;
+    }
 
 }
