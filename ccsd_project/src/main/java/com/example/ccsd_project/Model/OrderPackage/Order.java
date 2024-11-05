@@ -5,10 +5,10 @@ import java.util.List;
 
 public class Order {
      private String id, email,payment;
-     private String[] address;
-     private double subtotal,fee;
-     private boolean isDeliverable,accepted;
-     private List<Cart> cart;
+     private String[] address; //0:street, 1:postcode, 2:city
+     private static double fee=20,total,subtotal;
+     private static boolean isDeliverable,accepted;
+     private static List<Cart> cart;
      private LocalDateTime bookingTime;
      private int duration;
 
@@ -25,10 +25,14 @@ public class Order {
           this.address = address;
      }
 
-     public void setSubTotal() {
+     public static double calculateSubTotal(List<Cart> cart) {
           final double[] sum = { 0 };
           cart.forEach(n -> sum[0] += n.calculatePrice());
-          subtotal = sum[0];
+          return subtotal = sum[0];
+     }
+
+     public static void calculateTotal(){
+          total = subtotal + (isDeliverable?fee:0);
      }
 
      public String getId() {
@@ -55,4 +59,7 @@ public class Order {
           this.cart = cart;
      }
 
+     public static double getFee() {
+          return fee;
+     }
 }

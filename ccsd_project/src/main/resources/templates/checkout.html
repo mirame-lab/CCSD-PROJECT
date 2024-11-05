@@ -37,7 +37,8 @@
   <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
   <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.9.9/dist/css/tempus-dominus.min.css">
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.9.9/dist/css/tempus-dominus.min.css">
 </head>
 
 <body class="contact-us">
@@ -50,15 +51,10 @@
       <div class="container">
         <div class="row">
           <div
-            class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-relative top-0 start-0 justify-content-center flex-column"
-            >
-            <div class="row"
-            style="height: 300px; overflow-y: auto;" 
-            th:include="~{order.html :: cartlist}">
+            class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-relative top-0 start-0 justify-content-center flex-column">
+            <div class="row" style="height: 300px; overflow-y: auto;" th:include="~{order.html :: cartlist}">
             </div>
-            <div class="row"
-            th:include="~{order.html :: summary}"
-            >
+            <div class="row" th:include="~{order.html :: summary}">
             </div>
           </div>
 
@@ -121,7 +117,8 @@
                       <div id="addressFields" style="display: none;">
                         <div class="row">
                           <div class="col-12 input-group input-group-static mb-4">
-                            <label for="address">Street:</label> <input type="text" name="street" class="form-control" id="street">
+                            <label for="address">Street:</label> <input type="text" name="street" class="form-control"
+                              id="street">
                           </div>
                         </div>
                         <div class="row">
@@ -158,11 +155,15 @@
                       </div>
                       <div class="row">
                         <div class="col-12">
-                          <div class="form-group"> <label for="datetimepicker">Select Date and Time</label> 
-                            <div class="input-group date" id="datetimepicker" data-td-target-input="nearest" data-td-target-toggle="nearest"> 
-                              <input type="text" class="form-control" data-td-target="#datetimepicker"/> 
-                              <span class="input-group-text" data-td-target="#datetimepicker" data-td-toggle="datetimepicker"> 
-                                <i class="fas fa-calendar-alt"></i> </span> </div> </div>
+                          <div class="form-group"> <label for="datetimepicker">Select Date and Time</label>
+                            <div class="input-group date" id="datetimepicker" data-td-target-input="nearest"
+                              data-td-target-toggle="nearest">
+                              <input type="text" name="bookingdatetime" class="form-control datepicker" data-td-target="#datetimepicker" />
+                              <span class="input-group-text" data-td-target="#datetimepicker"
+                                data-td-toggle="datetimepicker">
+                                <i class="fas fa-calendar-alt"></i> </span>
+                            </div>
+                          </div>
                         </div>
                       </div>
                       <div class="row">
@@ -180,35 +181,43 @@
     </div>
   </section>
   <!-- -------- END HEADER 8 w/ card over right bg image ------- -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script> 
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
-  
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
   <script src="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.9.9/dist/js/tempus-dominus.min.js"></script>
-  <script th:inline="javascript"> 
-    document.addEventListener('DOMContentLoaded', function() { var dateTimePickerElement = document.getElementById('datetimepicker'); new tempusDominus.TempusDominus(dateTimePickerElement, { display: { components: { calendar: true, clock: true } } }); });
+  <script th:inline="javascript">
+    document.addEventListener('DOMContentLoaded', function () { var dateTimePickerElement = document.getElementById('datetimepicker'); new tempusDominus.TempusDominus(dateTimePickerElement, { display: { components: { calendar: true, clock: true } } }); });
   </script>
-  <script th:inline="javascript"> function toggleAddressFields() {
+  <script th:inline="javascript">
+    /*<![CDATA[*/
+    var fee = /*[[${fee}]]*/ "default";
+    var order = /*[[${order}]]*/ "default";
+    console.log("Thymeleaf Variable in JS:", order);
+    /*]]>*/
+
+    function toggleAddressFields() {
       var option1 = document.getElementById('option1');
       var addressFields = document.getElementById('addressFields');
       var isDeliverable = document.getElementById('isDeliverable');
-      if (option1.checked) { 
-        addressFields.style.display = 'block'; 
+      if (option1.checked) {
+        addressFields.style.display = 'block';
         isDeliverable.value = true;
+        document.getElementById('fee').innerText = "RM"+ fee;
+        document.getElementById("feeVal").value = fee;
         }
-      else { 
-        addressFields.style.display = 'none'; 
+      else {
+        addressFields.style.display = 'none';
         isDeliverable.value = false;
+        document.getElementById('fee').innerText = "RM"+0;
+        document.getElementById("feeVal").value = 0;
       }
-    } </script>
-  <script th:inline="javascript">
-    /*<![CDATA[*/
-    var order = /*[[${order}]]*/ "default";
-    console.log("Thymeleaf Variable in JS:", order);
+      calcTotal();
+    }
 
 
-    /*]]>*/
   </script>
+
   <footer th:replace="~{fragments/footer.html :: footer}">
   </footer>
   <!--   Core JS Files   -->

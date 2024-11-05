@@ -51,27 +51,35 @@ public class OrderController {
     @GetMapping("/order")
     public String getCart(Model model) {
         model.addAttribute("cart", cart);
-        model.addAttribute("subtotal",calculateSubTotal());
+        model.addAttribute("subtotal",Order.calculateSubTotal(cart));
         return "order";
     }
 
     @GetMapping("/checkout")
     public String getCheckout(Model model){
         model.addAttribute("cart", cart);
-        model.addAttribute("subtotal",calculateSubTotal());
+        model.addAttribute("subtotal",Order.calculateSubTotal(cart));
         model.addAttribute("order", db);
+        model.addAttribute("fee",Order.getFee());
         return "checkout";
     }
     @PostMapping("/checkout")
     public String submitOrder(@RequestBody String body,
-    @RequestParam("email") String email,@RequestParam("isDeliverable") boolean isDeliverable,
-    @RequestParam("street") String street){
-        //email,address,payment type,datetime get from form
-        String orderID = "order#"+ UUID.randomUUID().toString();
-        db.add(new Order(orderID, cart)); 
-        //create new order pending payment
-        return "redirect:/checkout";
-    }
+    @RequestParam("email") String email,
+    @RequestParam("isDeliverable") boolean isDeliverable,
+    @RequestParam(value = "street", required = false) String street,
+    @RequestParam(value = "postcode", required = false) String postcode,
+    @RequestParam(value = "city", required = false) String city,
+    @RequestParam(value = "bookingdatetime", required = false) String booking
+    ){
+    
+    //email,address,payment type,datetime get from form
+    String orderID = "order#" + UUID.randomUUID().toString();
+    // db.add(new Order(orderID, cart)); 
+    //create new order pending payment
+    return "redirect:/checkout";
+}
+
 
     @PostMapping("/order")
     public String createOrder(Model model){
@@ -93,12 +101,6 @@ public class OrderController {
         return "order";
     }
 
-
-    public double calculateSubTotal(){
-        final double[] sum = {0};
-        cart.forEach(n-> sum[0]+=n.calculatePrice());
-            return sum[0];
-       }
     
     public List<LocalDateTime> getBookedDates(){
         //get bookingTime from all Orders

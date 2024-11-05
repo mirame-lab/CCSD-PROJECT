@@ -78,7 +78,9 @@
             <!-- Check if cart is empty -->
             <th:block th:if="${#lists.isEmpty(cart)}">
               <div id="empty-cart-message" class="row-lg-12 pb-4 p-3 text-center justify-content-center ">
-                <img src="https://assets.streamlinehq.com/image/private/w_200,h_200,ar_1/f_auto/v1/icons/tokyo-duotone/shopping/shopping/empty-cart-2-jjbce159nka8571l91lxx8.png?_a=DAJFJtWIZAA0" alt="">
+                <img
+                  src="https://assets.streamlinehq.com/image/private/w_200,h_200,ar_1/f_auto/v1/icons/tokyo-duotone/shopping/shopping/empty-cart-2-jjbce159nka8571l91lxx8.png?_a=DAJFJtWIZAA0"
+                  alt="">
                 <h5>Cart is empty!</h5>
                 <p>Choose a service to get started.</p>
               </div>
@@ -159,69 +161,20 @@
                   </div>
                 </form>
               </div>
+              <script th:inline="javascript">
+              calcTotal();
+                function calcTotal() {
+                  var subtotal = parseFloat(document.getElementById("subtotalVal").value);
+                  var fee = parseFloat(document.getElementById("feeVal").value);
+                  var total = subtotal + fee;
+                  document.getElementById("total").innerHTML = "RM" + total;
+                }
+              </script>
             </div>
           </div>
         </div>
       </div>
-      <script th:inline="javascript">
 
-
-        var subtotal = document.getElementById("subtotalVal").value;
-        var fee = document.getElementById("feeVal").value;
-
-        document.getElementById("total").innerHTML = subtotal + fee;
-
-        // function changeQty(val, id, item) {
-        //              const updatedValue = parseInt(value); // Get the new input value
-        // console.log(item);
-        //              const data = {
-        //                  id: "",
-        //                  quantity: updatedValue,
-        //                  service: "",
-        //                  classification:"",
-        //                  price: 0,
-        //                  type: ""
-        //              };
-
-        // }
-
-        //
-        //        document.getElementById("quantity").addEventListener("change", async function (event) {
-        //          event.preventDefault()
-        //            const updatedValue = parseInt(event.target.value); // Get the new input value
-        //            console.log((typeof updatedValue) + updatedValue);
-        //            const data = {
-        //              id: "",
-        //              quantity: updatedValue,
-        //              service: "",
-        //              classification:"",
-        //              price: 0,
-        //              type: ""
-        //            }; // update quantity
-        //            const id = document.querySelector('#itemID').value
-        //          const variableFromController = /*[[${cart}]]*/
-        //            console.log(variableFromController);
-        //            try {
-        //              const response = await fetch('/order/${id}', {
-        //          method: 'PUT',
-        //          headers: {
-        //            'Content-Type': 'application/json'
-        //          },
-        //          body: data
-        //
-        //        });
-        //
-        //        if (response.ok) {
-        //          const result = await response.json();
-        //          console.log('Update successful:', result);
-        //        } else {
-        //          console.error('Update failed:', response.status);
-        //        }
-        //        } catch (error) {
-        //        console.error('Request error:', error);
-        //        }
-        //        });
-      </script>
     </section>
 
   </div>
@@ -246,6 +199,57 @@
         bgParallax.style.transform = 'translate3d(0,' + oVal + 'px,0)';
       }, 6);
     }
+
+    // function changeQty(val, id, item) {
+    //              const updatedValue = parseInt(value); // Get the new input value
+    // console.log(item);
+    //              const data = {
+    //                  id: "",
+    //                  quantity: updatedValue,
+    //                  service: "",
+    //                  classification:"",
+    //                  price: 0,
+    //                  type: ""
+    //              };
+
+    // }
+
+    //
+    //        document.getElementById("quantity").addEventListener("change", async function (event) {
+    //          event.preventDefault()
+    //            const updatedValue = parseInt(event.target.value); // Get the new input value
+    //            console.log((typeof updatedValue) + updatedValue);
+    //            const data = {
+    //              id: "",
+    //              quantity: updatedValue,
+    //              service: "",
+    //              classification:"",
+    //              price: 0,
+    //              type: ""
+    //            }; // update quantity
+    //            const id = document.querySelector('#itemID').value
+    //          const variableFromController = /*[[${cart}]]*/
+    //            console.log(variableFromController);
+    //            try {
+    //              const response = await fetch('/order/${id}', {
+    //          method: 'PUT',
+    //          headers: {
+    //            'Content-Type': 'application/json'
+    //          },
+    //          body: data
+    //
+    //        });
+    //
+    //        if (response.ok) {
+    //          const result = await response.json();
+    //          console.log('Update successful:', result);
+    //        } else {
+    //          console.error('Update failed:', response.status);
+    //        }
+    //        } catch (error) {
+    //        console.error('Request error:', error);
+    //        }
+    //        });
   </script>
 </body>
 
