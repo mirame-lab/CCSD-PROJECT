@@ -51,38 +51,47 @@ public class OrderController {
     @GetMapping("/order")
     public String getCart(Model model) {
         model.addAttribute("cart", cart);
-        model.addAttribute("subtotal",Order.calculateSubTotal(cart));
+        model.addAttribute("subtotal", Order.calculateSubTotal(cart));
         return "order";
     }
 
     @GetMapping("/checkout")
-    public String getCheckout(Model model){
+    public String getCheckout(Model model) {
         model.addAttribute("cart", cart);
-        model.addAttribute("subtotal",Order.calculateSubTotal(cart));
+        model.addAttribute("subtotal", Order.calculateSubTotal(cart));
         model.addAttribute("order", db);
-        model.addAttribute("fee",Order.getFee());
+        model.addAttribute("fee", Order.getFee());
         return "checkout";
     }
+
     @PostMapping("/checkout")
     public String submitOrder(@RequestBody String body,
-    @RequestParam("email") String email,
-    @RequestParam("isDeliverable") boolean isDeliverable,
-    @RequestParam(value = "street", required = false) String street,
-    @RequestParam(value = "postcode", required = false) String postcode,
-    @RequestParam(value = "city", required = false) String city,
-    @RequestParam(value = "bookingdatetime", required = false) String booking
-    ){
-    
-    //email,address,payment type,datetime get from form
-    String orderID = "order#" + UUID.randomUUID().toString();
-    // db.add(new Order(orderID, cart)); 
-    //create new order pending payment
-    return "redirect:/checkout";
-}
-
+            @RequestParam(value = "email", required = false) String email,
+            @RequestParam(value = "isDeliverable", required = false) boolean isDeliverable,
+            @RequestParam(value = "street", required = false) String street,
+            @RequestParam(value = "postcode", required = false) String postcode,
+            @RequestParam(value = "city", required = false) String city,
+            @RequestParam(value = "bookingdatetime", required = false) String booking,
+            @RequestParam(value = "paymentType", required=false) String paymentType) {
+                
+        //test form
+        System.out.println("Body: " + body);
+        System.out.println("Email: " + email);
+        System.out.println("Is Deliverable: " + isDeliverable);
+        System.out.println("Street: " + street);
+        System.out.println("Postcode: " + postcode);
+        System.out.println("City: " + city);
+        System.out.println("Booking Datetime: " + booking);
+        System.out.println("PaymentType: " + paymentType);
+        
+        String orderID = "order#" + UUID.randomUUID().toString();
+        // db.add(new Order(orderID, cart));
+        // create new order pending payment
+        return "redirect:/checkout";
+    }
 
     @PostMapping("/order")
-    public String createOrder(Model model){
+    public String createOrder(Model model) {
         return "redirect:/checkout";
     }
 
@@ -101,9 +110,8 @@ public class OrderController {
         return "order";
     }
 
-    
-    public List<LocalDateTime> getBookedDates(){
-        //get bookingTime from all Orders
+    public List<LocalDateTime> getBookedDates() {
+        // get bookingTime from all Orders
         return bookings;
     }
 
