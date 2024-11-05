@@ -2,13 +2,25 @@ package com.example.ccsd_project.Controller;
 
 import java.util.ArrayList;
 
+
 import com.example.ccsd_project.Model.ServicePackage.Car;
+import com.example.ccsd_project.Repository.CarRepository;
 
+import jakarta.annotation.PostConstruct;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+@Controller
 public class CarController {
-    public ArrayList<Car> carList = new ArrayList<>(); //db
+    
+    @Autowired
+    private CarRepository carRepository;
 
-    public CarController(){
-        carList.add(new Car("small","Perodua Kancil,Daihatsu Mira, Suzuki Alto, Hyundai Atoz, Kia Picanto"));
+    public ArrayList<Car> carList = new ArrayList<>(); 
+
+    public CarController() {
+        carList.add(new Car("small","Perodua Kancil, Daihatsu Mira, Suzuki Alto, Hyundai Atoz, Kia Picanto"));
         carList.add(new Car("compact","Perodua Myvi, Honda City, Suzuki Swift, Mazda 2, Ford Fiesta, Kia Rio, Hyundai i20, Mitsubishi Attrage, Volkswagen Polo, Renault Clio, Toyota Yaris, Honda Jazz, Nissan Note, Proton Iriz, Perodua Axia, Peugeot 208, Citroen C3"));
         carList.add(new Car("sedan","Honda Accord, Toyota Camry, Nissan Teana, Proton Perdana, Hyundai Sonata, Mazda 6, Volkswagen Jetta, Kia Optima, Subaru Legacy, Honda City, Toyota Vios, Nissan Almera, Proton Saga, Mitsubishi Lancer"));
         carList.add(new Car("sedan luxury","Mercedes-Benz S-Class, BMW 7 Series, Audi A8, Lexus LS, Jaguar XJ, Volvo S90, Porsche Panamera, Maserati Ghibli, Bentley Flying Spur, Rolls-Royce Phantom, Infiniti Q70, Genesis G80, Acura RLX, Land Rover Range Rover Velar, Tesla Model S"));
@@ -17,5 +29,12 @@ public class CarController {
         carList.add(new Car("crossover","Honda HR-V, Toyota C-HR, Nissan Qashqai, Proton X50, Mazda CX-30, Hyundai Kona, Kia Seltos, Subaru Crosstrek, Ford EcoSport, Mitsubishi ASX, Peugeot 2008, Chevrolet Tracker, Volkswagen T-Cross, Citroen C3 Aircross, Renault Captur"));
         carList.add(new Car("mpv","Perodua Alza, Honda Mobilio, Toyota Innova, Nissan Serena, Proton Exora, Suzuki Ertiga, Kia Carnival, Hyundai Staria, Mazda 5, Renault Triber, Ford Galaxy, Mitsubishi Delica, Volkswagen Multivan, Changan Alsvin, Toyota Avanza"));
         carList.add(new Car("mpv luxury","Mercedes-Benz V-Class, BMW 2 Series Gran Tourer, Toyota Alphard, Nissan Elgrand, Lexus LM, Kia Carnival (high-spec), Hyundai Staria Premium, Volkswagen Multivan, Audi Q7 (with MPV features), Peugeot Traveller"));
+    }
+
+    @PostConstruct
+    public void saveCarsToDatabase() {
+        if (carRepository.count() == 0) {
+            carRepository.saveAll(carList);
+        }
     }
 }
