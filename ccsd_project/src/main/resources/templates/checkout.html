@@ -47,14 +47,19 @@
   </div>
   <!-- -------- START HEADER 8 w/ card over right bg image ------- -->
   <section>
-    <div class="page-header min-vh-100">
+    <div class="page-header min-vh-100 mt-5">
       <div class="container">
         <div class="row">
           <div
             class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-relative top-0 start-0 justify-content-center flex-column">
-            <div class="row" style="height: 300px; overflow-y: auto;" th:include="~{order.html :: cartlist}">
+            <div class="row" style="height: 350px; overflow-y: auto;" th:include="~{order.html :: cartlist}">
             </div>
-            <div class="row" th:include="~{order.html :: summary}">
+            <div class="row">
+              <div class="card card-frame bg-gray-200">
+                <div class="card-body">
+                  <div th:replace="~{order.html :: summary}"></div>
+                </div>
+              </div>
             </div>
           </div>
 

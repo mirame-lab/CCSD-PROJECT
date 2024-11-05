@@ -117,41 +117,52 @@
 
           <!-- END Cart item section -->
           <div class="col-lg-4">
-            <div class="card card-frame bg-gray-200" th:fragment="summary">
+            <div class="card card-frame bg-gray-200" >
               <div class="card-body"><!-- Action is POST since create new order -->
                 <form method="post" action="/order">
-                  <div class="row pb-4">
-                    <h5>Order Summary</h5>
-                  </div>
-                  <div class="row mb-1">
-                    <div class="col-8">
-                      <span>Subtotal</span>
+                  <div th:fragment="summary">
+                    <div class="row pb-4">
+                      <h5>Order Summary</h5>
                     </div>
-                    <div class="col-4 text-end">
-                      <span id="subtotal" th:text="'RM'+ ${subtotal}"></span>
-                      <input id="subtotalVal" type="hidden" th:value="${subtotal}">
+                    <div class="row mb-1">
+                      <div class="col-8">
+                        <span>Subtotal</span>
+                      </div>
+                      <div class="col-4 text-end">
+                        <span id="subtotal" th:text="'RM'+ ${subtotal}"></span>
+                        <input id="subtotalVal" type="hidden" th:value="${subtotal}">
+                      </div>
+  
                     </div>
-
-                  </div>
-                  <hr style="display:block; background: linear-gradient(to right, white, gray, white);">
-                  <div class="row">
-                    <div class="col-8">
-                      <span>Service fee</span>
+                    <hr style="display:block; background: linear-gradient(to right, white, gray, white);">
+                    <div class="row">
+                      <div class="col-8">
+                        <span>Service fee</span>
+                      </div>
+                      <div class="col-4 text-end">
+                        <span id="fee">RM 0</span>
+                        <input id="feeVal" type="hidden" value="0">
+                      </div>
                     </div>
-                    <div class="col-4 text-end">
-                      <span id="fee">RM 0</span>
-                      <input id="feeVal" type="hidden" value="0">
+                    <hr style="display:block; background: linear-gradient(to right, white, gray, white);">
+                    <div class="row pb-2">
+                      <div class="col-8">
+                        <h5>Total</h5>
+                      </div>
+                      <div class="col-4 text-end">
+                        <h5 id="total"></h5>
+                        <input id="totalVal" type="hidden" value="">
+                      </div>
                     </div>
-                  </div>
-                  <hr style="display:block; background: linear-gradient(to right, white, gray, white);">
-                  <div class="row pb-2">
-                    <div class="col-8">
-                      <h5>Total</h5>
-                    </div>
-                    <div class="col-4 text-end">
-                      <h5 id="total"></h5>
-                      <input id="totalVal" type="hidden" value="">
-                    </div>
+                    <script th:inline="javascript">
+                      calcTotal();
+                        function calcTotal() {
+                          var subtotal = parseFloat(document.getElementById("subtotalVal").value);
+                          var fee = parseFloat(document.getElementById("feeVal").value);
+                          var total = subtotal + fee;
+                          document.getElementById("total").innerHTML = "RM" + total;
+                        }
+                      </script>
                   </div>
                   <div class="row">
                     <button type="submit" class="btn bg-gradient-dark w-100">Checkout</button>
@@ -161,15 +172,7 @@
                   </div>
                 </form>
               </div>
-              <script th:inline="javascript">
-              calcTotal();
-                function calcTotal() {
-                  var subtotal = parseFloat(document.getElementById("subtotalVal").value);
-                  var fee = parseFloat(document.getElementById("feeVal").value);
-                  var total = subtotal + fee;
-                  document.getElementById("total").innerHTML = "RM" + total;
-                }
-              </script>
+
             </div>
           </div>
         </div>
