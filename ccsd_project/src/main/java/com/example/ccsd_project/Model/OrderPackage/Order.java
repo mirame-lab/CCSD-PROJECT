@@ -4,9 +4,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class Order {
-     private String id, email, address,payment;
+     private String id, email,payment;
+     private String[] address;
      private double subtotal,fee;
-     private boolean isDeliverable,approved=false;
+     private boolean isDeliverable,accepted;
      private List<Cart> cart;
      private LocalDateTime bookingTime;
      private int duration;
@@ -16,11 +17,11 @@ public class Order {
           this.cart = cart;
      }
 
-     public String getAddress() {
+     public String[] getAddress() {
           return address;
      }
 
-     public void setAddress(String address) {
+     public void setAddress(String[] address) {
           this.address = address;
      }
 

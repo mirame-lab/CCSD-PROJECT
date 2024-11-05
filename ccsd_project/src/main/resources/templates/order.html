@@ -75,33 +75,35 @@
 
 
           <div id="ordercontainer" class="item col-lg-8 col-6" th:fragment="cartlist">
-            <th:block th:each="item : ${cart}">
+            <!-- Check if cart is empty -->
+            <th:block th:if="${#lists.isEmpty(cart)}">
+              <div id="empty-cart-message" class="row-lg-12 pb-4 p-3 text-center justify-content-center ">
+                <img src="https://assets.streamlinehq.com/image/private/w_200,h_200,ar_1/f_auto/v1/icons/tokyo-duotone/shopping/shopping/empty-cart-2-jjbce159nka8571l91lxx8.png?_a=DAJFJtWIZAA0" alt="">
+                <h5>Cart is empty!</h5>
+                <p>Choose a service to get started.</p>
+              </div>
+            </th:block> <!-- Iterate over items in cart if not empty -->
+            <th:block th:unless="${#lists.isEmpty(cart)}" th:each="item : ${cart}">
               <div id="orderitem" class="row-lg-12 pb-4 p-3">
                 <div class="row-lg-12"> <!--service name -->
-                  <h5 id="service" th:text="${item.service}"></h5>
-                  <input type="hidden" id="itemID" th:value="${item.id}">
+                  <h5 id="service" th:text="${item.service}"></h5> <input type="hidden" id="itemID"
+                    th:value="${item.id}">
                 </div>
                 <div class="row-lg-12"> <!--service details -->
                   <div class="row">
-                    <div class="col-md-3">
-                      <span id="classification" class="text-dark pt-1 mb-0" th:text="${item.classification}"></span>
-                    </div>
-                    <div class="col-md-3">
-                      <span>Car type: </span><br>
-                      <span id="type" th:text="${item.type}"></span>
+                    <div class="col-md-3"> <span id="classification" class="text-dark pt-1 mb-0"
+                        th:text="${item.classification}"></span> </div>
+                    <div class="col-md-3"> <span>Car type: </span><br> <span id="type" th:text="${item.type}"></span>
                     </div>
                     <div class="col-lg-1">
-                      <div class="input-group input-group-outline">
-                        <input name="quantity" class="form-control" type="number" value="1" aria-valuemin="1"
-                          aria-valuemax="50" th:value="${item.quantity}" disabled />
-                      </div>
+                      <div class="input-group input-group-outline"> <input name="quantity" class="form-control"
+                          type="number" value="1" aria-valuemin="1" aria-valuemax="50" th:value="${item.quantity}"
+                          disabled /> </div>
                     </div>
                     <div class="col-md-4 text-center">
                       <h6 id="price" th:text="'RM'+ ${item.calculatePrice()}"></h6>
                     </div>
-                    <div class="col-1">
-                      <a href=""><i class="fas fa-times"></i> </a>
-                    </div>
+                    <div class="col-1"> <a href=""><i class="fas fa-times"></i> </a> </div>
                   </div>
                 </div>
                 <hr style="display:block; background: linear-gradient(to right, white, gray, white);">
@@ -112,12 +114,10 @@
 
 
           <!-- END Cart item section -->
-          <div class="col-lg-4" >
+          <div class="col-lg-4">
             <div class="card card-frame bg-gray-200" th:fragment="summary">
               <div class="card-body"><!-- Action is POST since create new order -->
-                <form 
-                method="post"
-                action="/order">
+                <form method="post" action="/order">
                   <div class="row pb-4">
                     <h5>Order Summary</h5>
                   </div>
@@ -166,22 +166,22 @@
       <script th:inline="javascript">
 
 
-          var subtotal = document.getElementById("subtotalVal").value;
-          var fee = document.getElementById("feeVal").value;
+        var subtotal = document.getElementById("subtotalVal").value;
+        var fee = document.getElementById("feeVal").value;
 
-          document.getElementById("total").innerHTML = subtotal + fee;
-        
+        document.getElementById("total").innerHTML = subtotal + fee;
+
         // function changeQty(val, id, item) {
-          //              const updatedValue = parseInt(value); // Get the new input value
-          // console.log(item);
-          //              const data = {
-          //                  id: "",
-          //                  quantity: updatedValue,
-          //                  service: "",
-          //                  classification:"",
-          //                  price: 0,
-          //                  type: ""
-          //              };
+        //              const updatedValue = parseInt(value); // Get the new input value
+        // console.log(item);
+        //              const data = {
+        //                  id: "",
+        //                  quantity: updatedValue,
+        //                  service: "",
+        //                  classification:"",
+        //                  price: 0,
+        //                  type: ""
+        //              };
 
         // }
 

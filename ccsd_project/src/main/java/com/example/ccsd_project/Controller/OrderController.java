@@ -63,7 +63,9 @@ public class OrderController {
         return "checkout";
     }
     @PostMapping("/checkout")
-    public String submitOrder(){
+    public String submitOrder(@RequestBody String body,
+    @RequestParam("email") String email,@RequestParam("isDeliverable") boolean isDeliverable,
+    @RequestParam("street") String street){
         //email,address,payment type,datetime get from form
         String orderID = "order#"+ UUID.randomUUID().toString();
         db.add(new Order(orderID, cart)); 
