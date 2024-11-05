@@ -4,7 +4,7 @@ public class Cart {
     private String id;
     private String service, classification, type;
     private double price;
-    private int quantity = 1;
+    private int quantity = 1,duration;
 
     public Cart(String id,String s,String c,String t,double p){
         service = s;

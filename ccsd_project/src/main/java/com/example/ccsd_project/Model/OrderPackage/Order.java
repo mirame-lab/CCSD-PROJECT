@@ -15,6 +15,8 @@ public class Order {
      public Order(String id, List<Cart> cart) {
           this.id = id;
           this.cart = cart;
+          //pending add rest of the variables from checkout form
+          this.subtotal = calculateSubTotal(cart);
      }
 
      public String[] getAddress() {
