@@ -12,289 +12,404 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
 <!DOCTYPE html>
 <html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link
+      rel="apple-touch-icon"
+      sizes="76x76"
+      href="../assets/img/apple-icon.png" />
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+    <title>Material Kit 2 by Creative Tim</title>
+    <!--     Fonts and icons     -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+    <!-- Nucleo Icons -->
+    <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script
+      src="https://kit.fontawesome.com/42d5adcbca.js"
+      crossorigin="anonymous"></script>
+    <!-- Material Icons -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"
+      rel="stylesheet" />
+    <!-- CSS Files -->
+    <link
+      id="pagestyle"
+      href="../assets/css/material-kit.css?v=3.0.4"
+      rel="stylesheet" />
+    <!-- Nepcha Analytics (nepcha.com) -->
+    <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
+    <script
+      defer
+      data-site="YOUR_DOMAIN_HERE"
+      src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+    <style>
+      /* CSS for sticky bottom element */
+      .sticky-bottom {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        padding: 10px;
+        text-align: center;
+        opacity: 0;
+        /* Start hidden */
+        transition: opacity 1s ease;
+        /* Smooth fade in/out transition */
+      }
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png" />
-  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
-  <title>Material Kit 2 by Creative Tim</title>
-  <!--     Fonts and icons     -->
-  <link rel="stylesheet" type="text/css"
-    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
-  <!-- Nucleo Icons -->
-  <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
-  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
-  <!-- Font Awesome Icons -->
-  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-  <!-- Material Icons -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
-  <!-- CSS Files -->
-  <link id="pagestyle" href="../assets/css/material-kit.css?v=3.0.4" rel="stylesheet" />
-  <!-- Nepcha Analytics (nepcha.com) -->
-  <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
-  <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
-  <style>
-    /* CSS for sticky bottom element */
-    .sticky-bottom {
-      position: fixed;
-      bottom: 0;
-      right: 0;
-      padding: 10px;
-      text-align: center;
-      opacity: 0;
-      /* Start hidden */
-      transition: opacity 1s ease;
-      /* Smooth fade in/out transition */
-    }
+      .visible {
+        opacity: 1;
+        /* Fully visible */
+      }
+    </style>
+    <style>
+      .video-wrapper {
+        position: relative;
+        padding-bottom: 56.25%;
+        /* 16:9 aspect ratio */
+        padding-top: 25px;
+        height: 0;
+      }
 
-    .visible {
-      opacity: 1;
-      /* Fully visible */
-    }
-  </style>
-  <style>
-    .video-wrapper {
-      position: relative;
-      padding-bottom: 56.25%;
-      /* 16:9 aspect ratio */
-      padding-top: 25px;
-      height: 0;
-    }
+      .video-wrapper video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
 
-    .video-wrapper video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-  </style>
-</head>
+  <body class="contact-us">
+    <!-- Navbar -->
+    <div class="container position-sticky z-index-sticky top-0">
+      <div class="row">
+        <div class="col-12">
+          <nav
+            class="navbar navbar-expand-lg blur border-radius-xl top-0 z-index-fixed shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
+            <div class="container-fluid px-0">
+              <a
+                class="navbar-brand font-weight-bolder ms-sm-3"
+                href="https://demos.creative-tim.com/material-kit/index"
+                rel="tooltip"
+                title="Designed and Coded by Creative Tim"
+                data-placement="bottom"
+                target="_blank">
+                Cuci Klear
+              </a>
+              <button
+                class="navbar-toggler shadow-none ms-2"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navigation"
+                aria-controls="navigation"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon mt-2">
+                  <span class="navbar-toggler-bar bar1"></span>
+                  <span class="navbar-toggler-bar bar2"></span>
+                  <span class="navbar-toggler-bar bar3"></span>
+                </span>
+              </button>
+              <div
+                class="collapse navbar-collapse pt-3 pb-2 py-lg-0 w-100"
+                id="navigation">
+                <ul class="navbar-nav navbar-nav-hover ms-auto">
+                  <li class="nav-item ms-lg-auto">
+                    <a
+                      class="nav-link nav-link-icon me-2"
+                      href="/"
+                      target="_blank">
+                      <p class="d-inline text-sm z-index-1 font-weight-bold">
+                        About Us
+                      </p>
+                    </a>
+                  </li>
 
-<body class="contact-us">
-<!-- Navbar -->
-<div class="container position-sticky z-index-sticky top-0"><div class="row"><div class="col-12">
-  <nav class="navbar navbar-expand-lg  blur border-radius-xl top-0 z-index-fixed shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
-    <div class="container-fluid px-0">
-      <a class="navbar-brand font-weight-bolder ms-sm-3" href="https://demos.creative-tim.com/material-kit/index" rel="tooltip" title="Designed and Coded by Creative Tim" data-placement="bottom" target="_blank">
-        Cuci Klear
-      </a>
-      <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon mt-2">
-        <span class="navbar-toggler-bar bar1"></span>
-        <span class="navbar-toggler-bar bar2"></span>
-        <span class="navbar-toggler-bar bar3"></span>
-      </span>
-      </button>
-      <div class="collapse navbar-collapse pt-3 pb-2 py-lg-0 w-100" id="navigation">
-        <ul class="navbar-nav navbar-nav-hover ms-auto">
+                  <li class="nav-item ms-lg-auto">
+                    <a
+                      class="nav-link nav-link-icon me-2"
+                      href="./pages/contact-us.html"
+                      target="_blank">
+                      <p class="d-inline text-sm z-index-1 font-weight-bold">
+                        Contact Us
+                      </p>
+                    </a>
+                  </li>
 
-          <li class="nav-item ms-lg-auto">
-            <a class="nav-link nav-link-icon me-2" href="/" target="_blank">
-              <p class="d-inline text-sm z-index-1 font-weight-bold">About Us</p>
-            </a>
-          </li>
-
-          <li class="nav-item ms-lg-auto">
-            <a class="nav-link nav-link-icon me-2" href="./pages/contact-us.html" target="_blank">
-              <p class="d-inline text-sm z-index-1 font-weight-bold">Contact Us</p>
-            </a>
-          </li>
-
-          <li class="nav-item ms-lg-auto">
-            <a class="nav-link nav-link-icon me-2" href="./pages/sign-in.html" target="_blank">
-              <p class="d-inline text-sm z-index-1 font-weight-bold">Sign In</p>
-            </a>
-          </li>
-          <li class="nav-item my-auto ms-3 ms-lg-0"></li>
-        </ul>
+                  <li class="nav-item ms-lg-auto">
+                    <a
+                      class="nav-link nav-link-icon me-2"
+                      href="./pages/sign-in.html"
+                      target="_blank">
+                      <p class="d-inline text-sm z-index-1 font-weight-bold">
+                        Sign In
+                      </p>
+                    </a>
+                  </li>
+                  <li class="nav-item my-auto ms-3 ms-lg-0"></li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+          <!-- End Navbar -->
+        </div>
       </div>
     </div>
-  </nav>
-  <!-- End Navbar -->
-</div>
-</div>
-</div>
-  <!-- header with description -->
-  <section
-    th:replace="~{fragments/formheader.html :: formheader('Interior Cleaning','Imagine stepping into a spotless, fresh car interior. A clean car isn’t just about looks—it creates a comfortable, healthy environment for every journey. 
+    <!-- header with description -->
+    <section
+      th:replace="~{fragments/formheader.html :: formheader('Interior Cleaning','Imagine stepping into a spotless, fresh car interior. A clean car isn’t just about looks—it creates a comfortable, healthy environment for every journey. 
     First impressions matter; a clean interior shows pride in ownership. It also helps keep dust, allergens, and bacteria at bay, ensuring a healthier space for you and your passengers. Routine cleaning maintains your car’s seats, carpets, 
     and dashboard, preventing wear and tear. Plus, a tidy car reduces stress and makes driving more enjoyable. 
     So, give your car the care it deserves—it’ll reward you with comfort and pride every time you hit the road.',
-    'https://scontent.fkul6-4.fna.fbcdn.net/v/t39.30808-6/272961911_1130926530814523_8234750432626552610_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeFy7BBj4u4Ezb4jHS6bxPPnpdSpmJLbzNCl1KmYktvM0NWhxTuesxvj5bp6kMXqfScObD4znrJ8HsGGhrS3uPNs&_nc_ohc=sT2RnmYDvuEQ7kNvgGRK4a-&_nc_zt=23&_nc_ht=scontent.fkul6-4.fna&_nc_gid=ApVZIclA7pbKS2UEv5m3g3M&oh=00_AYBrQQkjk91EQi393m5Gp0lvr_p4jqdb9uvuZ1NQbQoQ0w&oe=672AF4D6')}">
-  </section>
-  <section>
-    <div class="page-header min-vh-100">
-      <div class="container">
-        <div class="row">
-          <div
-            class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 start-0 text-center justify-content-center flex-column">
-            <div class="position-relative h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center"
-              id="pkgimg" style="
+    'https://scontent.fkul6-4.fna.fbcdn.net/v/t39.30808-6/272961911_1130926530814523_8234750432626552610_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeFy7BBj4u4Ezb4jHS6bxPPnpdSpmJLbzNCl1KmYktvM0NWhxTuesxvj5bp6kMXqfScObD4znrJ8HsGGhrS3uPNs&_nc_ohc=sT2RnmYDvuEQ7kNvgGRK4a-&_nc_zt=23&_nc_ht=scontent.fkul6-4.fna&_nc_gid=ApVZIclA7pbKS2UEv5m3g3M&oh=00_AYBrQQkjk91EQi393m5Gp0lvr_p4jqdb9uvuZ1NQbQoQ0w&oe=672AF4D6')}"></section>
+    <section>
+      <div class="page-header min-vh-100">
+        <div class="container">
+          <div class="row">
+            <div
+              class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 start-0 text-center justify-content-center flex-column">
+              <div
+                class="position-relative h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center"
+                id="pkgimg"
+                style="
                   background-image: url('../assets/img/illustrations/packagea.png');
                   background-size: cover;
-                " loading="lazy"></div>
-          </div>
-          <div class="col-xl-5 col-lg-6 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
-            <div class="card d-flex blur justify-content-center shadow-lg my-sm-0 my-sm-6 mt-8 mb-5">
-              <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-                <div class="bg-gradient-primary shadow-primary border-radius-lg p-3">
-                  <h3 class="text-white text-primary mb-0">
-                    Interior Cleaning
-                  </h3>
-                </div>
-              </div>
-              <div class="card-body">
-                <h3 id="price">RM180</h3>
-                <p class="pb-3" id="cardescription">
-                  Perodua Kancil,Daihatsu Mira, Suzuki Alto, Hyundai Atoz, Kia
-                  Picanto
-                </p>
-                <form id="interiorpackage-form" method="post" action="/interiorpackages">
-                  <div class="card-body p-0 my-3">
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="input-group input-group-static input-group-outline mb-4">
-                          <input id="packageprice" name="packageprice" type="hidden" value="180" />
-                          <input id="servicename" name="servicename" type="hidden" value="Interior Cleaning" />
-                          <input id="pkgname" name="pkgname" type="hidden" value="Package A" />
-                          <input id="carname" name="carname" type="hidden" value="small" />
-                          <label>Select car type:</label>
-                          <div class="dropdown">
-                            <select class="btn btn-outline-secondary dropdown-toggle" id="carlist" name="carlist"
-                              aria-expanded="false" onchange="getPrice()">
-                              <option value="0">Small</option>
-                              <option value="1">Compact</option>
-                              <option value="2">Sedan</option>
-                              <option value="3">Sedan luxury</option>
-                              <option value="4">SUV</option>
-                              <option value="5">4x4</option>
-                              <option value="6">Crossover</option>
-                              <option value="7">MPV</option>
-                              <option value="8">MPV Luxury</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="input-group input-group-static input-group-outline mb-4">
-                          <label>Select package:</label>
-                          <div class="dropdown">
-                            <label for="packagelist"></label><select class="btn btn-outline-secondary dropdown-toggle"
-                              id="packagelist" name="packagelist" aria-expanded="false"
-                              onchange="getPrice();changeImage();">
-                              <option value="0">Package A</option>
-                              <option value="1">Package B</option>
-                              <option value="2">Full Interior</option>
-                              <option value="3">Advance Full</option>
-                            </select>
-                            <script th:inline="javascript">
-                              /*<![CDATA[*/
-                              var cars = /*[[${cars}]]*/ "default";
-                              var carpackages = /*[[${carpackages}]]*/ "default";
-                              console.log("Thymeleaf Variable in JS:", cars);
-                              console.log("Thymeleaf Variable in JS:", carpackages);
-                              /*]]>*/
-                              getPrice()
-                              function getPrice() {
-
-                                var index = document.getElementById("carlist").value;
-                                var pIndex = document.getElementById("packagelist").value;
-                                console.log("car index:", index);
-
-                                var selectedCarDesc = cars[index].typedesc;
-                                document.getElementById("price").innerHTML = "RM" + carpackages[pIndex].carList[index].rate ;
-                                document.getElementById("cardescription").innerHTML = selectedCarDesc;
-                                //set hidden input values
-                                document.getElementById("packageprice").value = carpackages[pIndex].carList[index].rate;
-                                document.getElementById("pkgname").value = carpackages[pIndex].packageName;
-                                document.getElementById("carname").value = cars[index].type;
-                              }
-                              function changeImage() {
-                                var url;
-                                var currentPkgVal =
-                                  document.getElementById(
-                                    "packagelist"
-                                  ).value;
-
-                                switch (parseInt(currentPkgVal)) {
-                                  case 0:
-                                    url = "url('../assets/img/illustrations/packagea.png')";
-                                    break;
-                                  case 1:
-                                    url = "url('../assets/img/illustrations/packageb.png')";
-                                    break;
-                                  case 2:
-                                    url = "url('../assets/img/illustrations/fullinterior.png')";
-                                    break;
-                                  case 3:
-                                    url = "url('../assets/img/illustrations/advancedfull.png')";
-                                    break;
-                                }
-                                console.log(url)
-                                document.getElementById("pkgimg").style.backgroundImage = url;
-                              }
-
-                            </script>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-md-12 text-center">
-                        <button type="submit" class="btn bg-gradient-primary mt-3 mb-0" onclick="showStickyElement()">
-                          Add to cart
-                        </button>
-                        <script>
-                          function showStickyElement() {
-                            const element = document.getElementById("stickyElement");
-                            element.classList.add("visible");  // Show the element
-
-                            // Set a timer to fade out the element after 3 seconds
-                            setTimeout(() => {
-                              element.classList.remove("visible");  // Hide the element with fade
-                            }, 3000);
-                          }
-                          window.onload = function () {
-                            const urlParams = new URLSearchParams(window.location.search);
-                            const submitted = urlParams.has("submitted");
-
-                            if (submitted) {
-                              showStickyElement() // Trigger the JavaScript function
-                            }
-                          }
-
-                        </script>
-                      </div>
-                    </div>
+                "
+                loading="lazy"></div>
+            </div>
+            <div
+              class="col-xl-5 col-lg-6 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
+              <div
+                class="card d-flex blur justify-content-center shadow-lg my-sm-0 my-sm-6 mt-8 mb-5">
+                <div
+                  class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+                  <div
+                    class="bg-gradient-primary shadow-primary border-radius-lg p-3">
+                    <h3 class="text-white text-primary mb-0">
+                      Interior Cleaning
+                    </h3>
                   </div>
-                </form>
+                </div>
+                <div class="card-body">
+                  <h3 id="price">RM180</h3>
+                  <p class="pb-3" id="cardescription">
+                    Perodua Kancil,Daihatsu Mira, Suzuki Alto, Hyundai Atoz, Kia
+                    Picanto
+                  </p>
+                  <form
+                    id="interiorpackage-form"
+                    method="post"
+                    action="/interiorpackages">
+                    <div class="card-body p-0 my-3">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div
+                            class="input-group input-group-static input-group-outline mb-4">
+                            <input
+                              id="packageprice"
+                              name="packageprice"
+                              type="hidden"
+                              value="180" />
+                            <input
+                              id="servicename"
+                              name="servicename"
+                              type="hidden"
+                              value="Interior Cleaning" />
+                            <input
+                              id="pkgname"
+                              name="pkgname"
+                              type="hidden"
+                              value="Package A" />
+                            <input
+                              id="carname"
+                              name="carname"
+                              type="hidden"
+                              value="small" />
+                            <label>Select car type:</label>
+                            <div class="dropdown">
+                              <select
+                                class="btn btn-outline-secondary dropdown-toggle"
+                                id="carlist"
+                                name="carlist"
+                                aria-expanded="false"
+                                onchange="getPrice()">
+                                <option value="0">Small</option>
+                                <option value="1">Compact</option>
+                                <option value="2">Sedan</option>
+                                <option value="3">Sedan luxury</option>
+                                <option value="4">SUV</option>
+                                <option value="5">4x4</option>
+                                <option value="6">Crossover</option>
+                                <option value="7">MPV</option>
+                                <option value="8">MPV Luxury</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div
+                            class="input-group input-group-static input-group-outline mb-4">
+                            <label>Select package:</label>
+                            <div class="dropdown">
+                              <label for="packagelist"></label
+                              ><select
+                                class="btn btn-outline-secondary dropdown-toggle"
+                                id="packagelist"
+                                name="packagelist"
+                                aria-expanded="false"
+                                onchange="getPrice();changeImage();">
+                                <option value="0">Package A</option>
+                                <option value="1">Package B</option>
+                                <option value="2">Full Interior</option>
+                                <option value="3">Advance Full</option>
+                              </select>
+                              <script th:inline="javascript">
+                                /*<![CDATA[*/
+                                var cars = /*[[${cars}]]*/ "default";
+                                var carpackages =
+                                  /*[[${carpackages}]]*/ "default";
+                                console.log("Thymeleaf Variable in JS:", cars);
+                                console.log(
+                                  "Thymeleaf Variable in JS:",
+                                  carpackages
+                                );
+                                /*]]>*/
+                                getPrice();
+                                function getPrice() {
+                                  var index =
+                                    document.getElementById("carlist").value;
+                                  var pIndex =
+                                    document.getElementById(
+                                      "packagelist"
+                                    ).value;
+                                  console.log("car index:", index);
+
+                                  var selectedCarDesc = cars[index].typedesc;
+                                  document.getElementById("price").innerHTML =
+                                    "RM" +
+                                    carpackages[pIndex].carList[index].rate;
+                                  document.getElementById(
+                                    "cardescription"
+                                  ).innerHTML = selectedCarDesc;
+                                  //set hidden input values
+                                  document.getElementById(
+                                    "packageprice"
+                                  ).value =
+                                    carpackages[pIndex].carList[index].rate;
+                                  document.getElementById("pkgname").value =
+                                    carpackages[pIndex].packageName;
+                                  document.getElementById("carname").value =
+                                    cars[index].type;
+                                }
+                                function changeImage() {
+                                  var url;
+                                  var currentPkgVal =
+                                    document.getElementById(
+                                      "packagelist"
+                                    ).value;
+
+                                  switch (parseInt(currentPkgVal)) {
+                                    case 0:
+                                      url =
+                                        "url('../assets/img/illustrations/packagea.png')";
+                                      break;
+                                    case 1:
+                                      url =
+                                        "url('../assets/img/illustrations/packageb.png')";
+                                      break;
+                                    case 2:
+                                      url =
+                                        "url('../assets/img/illustrations/fullinterior.png')";
+                                      break;
+                                    case 3:
+                                      url =
+                                        "url('../assets/img/illustrations/advancedfull.png')";
+                                      break;
+                                  }
+                                  console.log(url);
+                                  document.getElementById(
+                                    "pkgimg"
+                                  ).style.backgroundImage = url;
+                                }
+                              </script>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-12 text-center">
+                          <button
+                            type="submit"
+                            class="btn bg-gradient-primary mt-3 mb-0"
+                            onclick="showStickyElement()">
+                            Add to cart
+                          </button>
+                          <script>
+                            function showStickyElement() {
+                              const element =
+                                document.getElementById("stickyElement");
+                              element.classList.add("visible"); // Show the element
+
+                              // Set a timer to fade out the element after 3 seconds
+                              setTimeout(() => {
+                                element.classList.remove("visible"); // Hide the element with fade
+                              }, 3000);
+                            }
+                            window.onload = function () {
+                              const urlParams = new URLSearchParams(
+                                window.location.search
+                              );
+                              const submitted = urlParams.has("submitted");
+
+                              if (submitted) {
+                                showStickyElement(); // Trigger the JavaScript function
+                              }
+                            };
+                          </script>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </section>
+    <!-- -------- END HEADER 8 w/ card over right bg image ------- -->
+    <div
+      id="stickyElement"
+      class="sticky-bottom alert alert-success text-white font-weight-bold"
+      role="alert">
+      Item added to cart!
     </div>
-  </section>
-  <!-- -------- END HEADER 8 w/ card over right bg image ------- -->
-  <div id="stickyElement" class="sticky-bottom alert alert-success text-white font-weight-bold" role="alert">
-    Item added to cart!
-  </div>
-  <div th:replace="~{fragments/footer.html :: footer}">
-
-  </div>
-  <!--   Core JS Files   -->
-  <script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
-  <script src="../assets/js/core/bootstrap.min.js" type="text/javascript"></script>
-  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <!-- Control Center for Material UI Kit: parallax effects, scripts for the example pages etc -->
-  <!--  Google Maps Plugin    -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI"></script>
-  <script src="../assets/js/material-kit.min.js?v=3.0.4" type="text/javascript"></script>
-</body>
-
+    <div th:replace="~{fragments/footer.html :: footer}"></div>
+    <!--   Core JS Files   -->
+    <script
+      src="../assets/js/core/popper.min.js"
+      type="text/javascript"></script>
+    <script
+      src="../assets/js/core/bootstrap.min.js"
+      type="text/javascript"></script>
+    <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <!-- Control Center for Material UI Kit: parallax effects, scripts for the example pages etc -->
+    <!--  Google Maps Plugin    -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI"></script>
+    <script
+      src="../assets/js/material-kit.min.js?v=3.0.4"
+      type="text/javascript"></script>
+  </body>
 </html>
