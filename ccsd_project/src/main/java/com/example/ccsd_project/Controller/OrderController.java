@@ -41,17 +41,17 @@ public class OrderController {
 
     @PostMapping("/interiorpackages")
     public String createInteriorPackageItem(@RequestBody String body,
-                                            @RequestParam("servicename") String service,
-                                            @RequestParam("pkgname") String pkg,
-                                            @RequestParam("carname") String car,
-                                            @RequestParam("packageprice") double price,
-                                            RedirectAttributes redirectAttributes) {
+            @RequestParam("servicename") String service,
+            @RequestParam("pkgname") String pkg,
+            @RequestParam("carname") String car,
+            @RequestParam("packageprice") double price,
+            RedirectAttributes redirectAttributes) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
 
         User user = userRepository.findByUsername(username)
-                            .orElseThrow(() -> new IllegalArgumentException("User not found: " + username));
+                .orElseThrow(() -> new IllegalArgumentException("User not found: " + username));
 
         // Generate a unique ID for the new cart item
         String id = UUID.randomUUID().toString();
@@ -70,7 +70,6 @@ public class OrderController {
         return "redirect:/interiorpackages";
     }
 
-
     @PostMapping("/carseats")
     public String createCarSeatItem(@RequestBody String body,
             @RequestParam("servicename") String service, @RequestParam("pkgname") String pkg,
@@ -88,13 +87,13 @@ public class OrderController {
         String username = authentication.getName();
 
         User user = userRepository.findByUsername(username)
-                              .orElseThrow(() -> new IllegalArgumentException("User not found: " + username));
+                .orElseThrow(() -> new IllegalArgumentException("User not found: " + username));
         List<Cart> userCart = cartRepository.findByUser(user);
 
         double subtotal = calculateSubTotal(userCart);
 
         model.addAttribute("cart", userCart);
-        model.addAttribute("subtotal",subtotal);
+        model.addAttribute("subtotal", subtotal);
         return "order";
     }
 
@@ -103,23 +102,33 @@ public class OrderController {
     }
 
     @GetMapping("/checkout")
-    public String getCheckout(Model model){
-        model.addAttribute("cart", cart);
-        model.addAttribute("subtotal",calculateSubTotal());
+    public String getCheckout(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("User not found: " + username));
+        List<Cart> userCart = cartRepository.findByUser(user);
+
+        double subtotal = calculateSubTotal(userCart);
+
+        model.addAttribute("cart", userCart);
+        model.addAttribute("subtotal", subtotal);
         model.addAttribute("order", db);
         return "checkout";
     }
+
     @PostMapping("/checkout")
-    public String submitOrder(){
-        //email,address,payment type,datetime get from form
-        String orderID = "order#"+ UUID.randomUUID().toString();
-        db.add(new Order(orderID, cart)); 
-        //create new order pending payment
+    public String submitOrder() {
+        // email,address,payment type,datetime get from form
+        String orderID = "order#" + UUID.randomUUID().toString();
+        db.add(new Order(orderID, cart));
+        // create new order pending payment
         return "redirect:/checkout";
     }
 
     @PostMapping("/order")
-    public String createOrder(Model model){
+    public String createOrder(Model model) {
         return "redirect:/checkout";
     }
 
@@ -138,15 +147,14 @@ public class OrderController {
         return "order";
     }
 
+    public double calculateSubTotal() {
+        final double[] sum = { 0 };
+        cart.forEach(n -> sum[0] += n.calculatePrice());
+        return sum[0];
+    }
 
-    public double calculateSubTotal(){
-        final double[] sum = {0};
-        cart.forEach(n-> sum[0]+=n.calculatePrice());
-            return sum[0];
-       }
-    
-    public List<LocalDateTime> getBookedDates(){
-        //get bookingTime from all Orders
+    public List<LocalDateTime> getBookedDates() {
+        // get bookingTime from all Orders
         return bookings;
     }
 
