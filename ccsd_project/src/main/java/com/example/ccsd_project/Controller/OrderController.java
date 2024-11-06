@@ -26,7 +26,6 @@ import com.example.ccsd_project.Model.OrderPackage.Order;
 import com.example.ccsd_project.Model.UserPackage.User;
 import com.example.ccsd_project.Repository.CartRepository;
 import com.example.ccsd_project.Repository.UserRepository;
-import com.example.ccsd_project.Service.UserService;
 
 @Controller
 public class OrderController {
@@ -34,7 +33,6 @@ public class OrderController {
     List<Order> db = new ArrayList<>();
     List<Cart> cart = new ArrayList<>();
     List<LocalDateTime> bookings = new ArrayList<>();
-    
 
     @Autowired
     private CartRepository cartRepository;
@@ -78,8 +76,21 @@ public class OrderController {
             @RequestParam("servicename") String service, @RequestParam("pkgname") String pkg,
             @RequestParam("carname") String car,
             @RequestParam("packageprice") double price, RedirectAttributes redirectAttributes) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("User not found: " + username));
+
+        // Generate a unique ID for the new cart item
         String id = UUID.randomUUID().toString();
-        cart.add(new Cart(id, service, pkg, car, price));
+
+        // Create a new Cart object with the provided data
+        Cart cartItem = new Cart(id, service, pkg, car, price);
+        cartItem.setUser(user);
+
+        // Save the cart item to the database using CartRepository
+        cartRepository.save(cartItem);
         redirectAttributes.addFlashAttribute("submitted", true);
         return "redirect:/carseats";
     }
@@ -134,11 +145,10 @@ public class OrderController {
             @RequestParam(value = "postcode", required = false) String postcode,
             @RequestParam(value = "city", required = false) String city,
             @RequestParam(value = "bookingdatetime", required = false) String booking,
-            @RequestParam(value = "paymentType", required=false) String paymentType,
-            @RequestParam(value = "username", required = false)String username
-            ) {
-                
-        //test form
+            @RequestParam(value = "paymentType", required = false) String paymentType,
+            @RequestParam(value = "username", required = false) String username) {
+
+        // test form
         // System.out.println("Email: " + email);
         // System.out.println("Is Deliverable: " + isDeliverable);
         // System.out.println("Street: " + street);
@@ -147,10 +157,10 @@ public class OrderController {
         // System.out.println(booking);
         // System.out.println("PaymentType: " + paymentType);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy h:mm a", Locale.US);
-        String[] address = {street,postcode,city};
-        LocalDateTime dateTimebooking = booking.isEmpty()?null:LocalDateTime.parse(booking, formatter);
+        String[] address = { street, postcode, city };
+        LocalDateTime dateTimebooking = booking.isEmpty() ? null : LocalDateTime.parse(booking, formatter);
 
-        db.add(new Order(email,username,paymentType,address,isDeliverable,dateTimebooking,cart));
+        db.add(new Order(email, username, paymentType, address, isDeliverable, dateTimebooking, cart));
 
         // create new order pending payment
         return "redirect:/checkout";
@@ -175,7 +185,6 @@ public class OrderController {
         model.addAttribute("cart", cart);
         return "order";
     }
-
 
     public List<LocalDateTime> getBookedDates() {
         // get bookingTime from all Orders
