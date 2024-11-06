@@ -77,6 +77,11 @@
                   or contact using our contact form.
                 </p>
                 <form id="checkout-form" method="post" action="/checkout" autocomplete="off">
+                  <input type="hidden" name="username" id="username"
+                  class="btn btn-sm bg-gradient-primary mb-0 me-1 mt-2 mt-md-0"
+                  sec:authorize="isAuthenticated()"
+                  th:value="${#authentication.name}"
+                  >
                   <div class="card-body p-0 my-3">
                     <div class="row">
                       <div class="col-md-6">

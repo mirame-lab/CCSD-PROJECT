@@ -24,4 +24,3 @@ public class Services {
     public void setDuration(double d){this.duration = d;}
 
 }
-

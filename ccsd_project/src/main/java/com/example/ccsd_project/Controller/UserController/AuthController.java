@@ -39,8 +39,6 @@ public class AuthController {
         if (userService.findUserByUsername(user.getUsername()).isPresent()) {
             result.rejectValue("username", null, "Username is already taken");
         }
-
-
         if (result.hasErrors()) {
             return "register";
         }
