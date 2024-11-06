@@ -1,8 +1,10 @@
 package com.example.ccsd_project.Controller;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -25,6 +27,7 @@ public class OrderController {
     List<Order> db = new ArrayList<>();
     List<Cart> cart = new ArrayList<>();
     List<LocalDateTime> bookings = new ArrayList<>();
+    
 
     @PostMapping("/interiorpackages")
     public String createInteriorPackageItem(@RequestBody String body,
@@ -72,20 +75,23 @@ public class OrderController {
             @RequestParam(value = "postcode", required = false) String postcode,
             @RequestParam(value = "city", required = false) String city,
             @RequestParam(value = "bookingdatetime", required = false) String booking,
-            @RequestParam(value = "paymentType", required=false) String paymentType) {
+            @RequestParam(value = "paymentType", required=false) String paymentType,
+            @RequestParam(value = "username", required = false)String username
+            ) {
                 
         //test form
-        System.out.println("Body: " + body);
-        System.out.println("Email: " + email);
-        System.out.println("Is Deliverable: " + isDeliverable);
-        System.out.println("Street: " + street);
-        System.out.println("Postcode: " + postcode);
-        System.out.println("City: " + city);
-        System.out.println("Booking Datetime: " + booking);
-        System.out.println("PaymentType: " + paymentType);
-        
-        String orderID = "order#" + UUID.randomUUID().toString();
-        // db.add(new Order(orderID, cart));
+        // System.out.println("Email: " + email);
+        // System.out.println("Is Deliverable: " + isDeliverable);
+        // System.out.println("Street: " + street);
+        // System.out.println("Postcode: " + postcode);
+        // System.out.println("City: " + city);
+        // System.out.println(booking);
+        // System.out.println("PaymentType: " + paymentType);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy h:mm a", Locale.US);
+        String[] address = {street,postcode,city};
+        LocalDateTime dateTimebooking = booking.isEmpty()?null:LocalDateTime.parse(booking, formatter);
+
+        db.add(new Order(email,username,paymentType,address,isDeliverable,dateTimebooking,cart));
         // create new order pending payment
         return "redirect:/checkout";
     }
