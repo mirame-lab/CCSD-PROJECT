@@ -20,3 +20,4 @@ buildNumber.properties
 # STS (Spring Tool Suite)
 ccsd_project/src/main/resources/logback-spring.xml
 logs/spring-boot-app.log
+ccsd_project/logs/spring-boot-app.log

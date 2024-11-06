@@ -89,7 +89,6 @@ public class OrderController {
 
         User user = userRepository.findByUsername(username)
                               .orElseThrow(() -> new IllegalArgumentException("User not found: " + username));
-
         List<Cart> userCart = cartRepository.findByUser(user);
 
         double subtotal = calculateSubTotal(userCart);
