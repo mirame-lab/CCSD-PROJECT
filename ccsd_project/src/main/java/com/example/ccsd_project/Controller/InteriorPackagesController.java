@@ -1,6 +1,5 @@
 package com.example.ccsd_project.Controller;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +30,7 @@ public class InteriorPackagesController {
 
     @PostConstruct
     public void initData() {
-        // Fetch cars from the database after Spring injects the dependencies
         List<Car> persistedCars = carRepository.findAll();
-        
-        // Check if any InteriorPackages records already exist in the database
         if (interiorPackagesRepository.count() == 0) {
             createInteriorPackage("Package A", "Car cushion + floor panel cleaning.", 2, persistedCars);
             createInteriorPackage("Package B", "Car cushion + floor panel + roof panel cleaning.", 3, persistedCars);
@@ -45,16 +41,11 @@ public class InteriorPackagesController {
     
     @Transactional
     public void createInteriorPackage(String packageName, String description, int duration, List<Car> carList) {
-        // Create a new, independent list of Car objects
         List<Car> independentCarList = carRepository.findAllById(
             carList.stream().map(Car::getId).toList()
         );
-    
-        // Create and save the InteriorPackages with an independent carList
         InteriorPackages interiorPackage = new InteriorPackages(packageName, description, duration, independentCarList);
         interiorPackagesRepository.save(interiorPackage);
-    
-        logger.info("Created Interior Package: " + packageName + " with car list: " + independentCarList);
     }
     
 
@@ -64,6 +55,7 @@ public class InteriorPackagesController {
         model.addAttribute("cars", cars);
         List<InteriorPackages> carPackages = interiorPackagesRepository.findAll();
         model.addAttribute("carpackages", carPackages);
+        logger.info("Retrieved all interior packages: " + carPackages.toString());
         return "interiorpackages";
     }
 }
