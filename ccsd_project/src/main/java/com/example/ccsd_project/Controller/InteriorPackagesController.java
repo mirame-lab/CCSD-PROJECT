@@ -11,40 +11,41 @@ import com.example.ccsd_project.Model.ServicePackage.Car;
 import com.example.ccsd_project.Model.ServicePackage.InteriorPackages;
 import com.example.ccsd_project.Repository.CarRepository;
 import com.example.ccsd_project.Repository.InteriorPackagesRepository;
+import com.example.ccsd_project.Service.CarService;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 @Controller
 public class InteriorPackagesController {
-    private static final Logger logger = LoggerFactory.getLogger(InteriorPackagesController.class);
 
     @Autowired
     private InteriorPackagesRepository interiorPackagesRepository;
 
     @Autowired
     private CarRepository carRepository;
+   
+    @Autowired
+    private CarService carService;
 
     @PostConstruct
     public void initData() {
         List<Car> persistedCars = carRepository.findAll();
         if (interiorPackagesRepository.count() == 0) {
-            createInteriorPackage("Package A", "Car cushion + floor panel cleaning.", 2, persistedCars);
-            createInteriorPackage("Package B", "Car cushion + floor panel + roof panel cleaning.", 3, persistedCars);
-            createInteriorPackage("Full Interior", "Car cushion + floor panel + door panel + dashboard + boot cleaning.", 4, persistedCars);
-            createInteriorPackage("Advance Full", "Detach seats and floor carpet. Suitable for old cars aging 5 years above", 2, persistedCars);
+            createInteriorPackage("Package A", "Car cushion + floor panel cleaning.", 2, persistedCars, 100, 80);
+            createInteriorPackage("Package B", "Car cushion + floor panel + roof panel cleaning.", 3, persistedCars, 150, 120);
+            createInteriorPackage("Full Interior", "Car cushion + floor panel + door panel + dashboard + boot cleaning.", 4, persistedCars, 200, 150);
+            createInteriorPackage("Advance Full", "Detach seats and floor carpet. Suitable for old cars aging 5 years above", 2, persistedCars, 250, 200);
         }
     }
-    
+
     @Transactional
-    public void createInteriorPackage(String packageName, String description, int duration, List<Car> carList) {
-        List<Car> independentCarList = carRepository.findAllById(
-            carList.stream().map(Car::getId).toList()
-        );
-        InteriorPackages interiorPackage = new InteriorPackages(packageName, description, duration, independentCarList);
+    public void createInteriorPackage(String packageName, String description, int duration, List<Car> carList, double rateForType1, double rateForType2) {
+        for (Car car : carList) {
+            carService.setPrice(car, rateForType1, rateForType2); // Set initial rates
+            carRepository.save(car); // Persist rate changes
+        }
+        InteriorPackages interiorPackage = new InteriorPackages(packageName, description, duration, carList);
         interiorPackagesRepository.save(interiorPackage);
     }
     
@@ -54,8 +55,24 @@ public class InteriorPackagesController {
         List<Car> cars = carRepository.findAll();
         model.addAttribute("cars", cars);
         List<InteriorPackages> carPackages = interiorPackagesRepository.findAll();
+        // for (InteriorPackages interiorPackage : carPackages) {
+        //     for (Car car : interiorPackage.getCarList()) {
+        //         // Apply rate setting
+        //         if (interiorPackage.getPackageName().equals("Package A")) {
+        //             carService.setPrice(car, 100, 80);
+        //         } else if (interiorPackage.getPackageName().equals("Package B")) {
+        //             carService.setPrice(car, 150, 120);
+        //         } else if (interiorPackage.getPackageName().equals("Full Interior")) {
+        //             carService.setPrice(car, 200, 150);
+        //         } else if (interiorPackage.getPackageName().equals("Advance Full")) {
+        //             carService.setPrice(car, 250, 200);
+        //         }
+        //     }
+        // }
         model.addAttribute("carpackages", carPackages);
-        logger.info("Retrieved all interior packages: " + carPackages.toString());
         return "interiorpackages";
     }
+
+    
+
 }

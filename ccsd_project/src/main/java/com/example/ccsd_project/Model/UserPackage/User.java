@@ -3,6 +3,12 @@ package com.example.ccsd_project.Model.UserPackage;
 import jakarta.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import com.example.ccsd_project.Model.OrderPackage.Cart;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.constraints.Email;
 
 @Entity
@@ -29,6 +35,9 @@ public class User {
 
     @Column(nullable = false)
     private String role = "USER"; // Default role
+
+   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Cart> cartItems = new ArrayList<>();
 
     // Getters and Setters
     // You can also use Lombok annotations for less boilerplate code
@@ -71,4 +80,13 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
+    
+    public List<Cart> getCartItems() {
+        return cartItems;
+    }
+
+    public void setCartItems(List<Cart> cartItems) {
+        this.cartItems = cartItems;
+    }
+
 }
