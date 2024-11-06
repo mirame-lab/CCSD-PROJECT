@@ -15,7 +15,6 @@ import com.example.ccsd_project.Service.UserService;
 @EnableWebSecurity
 public class SecurityConfig {
 
-
     private final UserService userService;
     private final BCryptPasswordEncoder passwordEncoder;
 
@@ -27,19 +26,17 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .authorizeHttpRequests(auth -> auth
-            // .requestMatchers("/secured-url").authenticated()
-                .anyRequest().permitAll() // Allow access to all routes without authentication
-            )
-            .csrf(csrf->csrf.disable())
-            .formLogin(form -> form
-                .loginPage("/login")
-                .permitAll()
-            )
-            .logout(logout -> logout
-                .permitAll()
-            );
-        
+                .authorizeHttpRequests(auth -> auth
+                        // .requestMatchers("/secured-url").authenticated()
+                        .anyRequest().permitAll() // Allow access to all routes without authentication
+                )
+                .csrf(csrf -> csrf.disable())
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .permitAll())
+                .logout(logout -> logout
+                        .permitAll());
+
         return http.build();
     }
 
@@ -54,7 +51,5 @@ public class SecurityConfig {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
     }
-
-    
 
 }
