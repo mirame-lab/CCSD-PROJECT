@@ -23,7 +23,7 @@ public class Cart {
     private String classification;
     private String type;
     private double price;
-    private int quantity = 1;
+    private int quantity = 1,duration;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)

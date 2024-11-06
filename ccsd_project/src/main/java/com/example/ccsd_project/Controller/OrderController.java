@@ -1,8 +1,10 @@
 package com.example.ccsd_project.Controller;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -32,6 +34,7 @@ public class OrderController {
     List<Order> db = new ArrayList<>();
     List<Cart> cart = new ArrayList<>();
     List<LocalDateTime> bookings = new ArrayList<>();
+    
 
     @Autowired
     private CartRepository cartRepository;
@@ -83,6 +86,7 @@ public class OrderController {
 
     @GetMapping("/order")
     public String getCart(Model model) {
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
 
@@ -94,6 +98,7 @@ public class OrderController {
 
         model.addAttribute("cart", userCart);
         model.addAttribute("subtotal", subtotal);
+
         return "order";
     }
 
@@ -103,6 +108,7 @@ public class OrderController {
 
     @GetMapping("/checkout")
     public String getCheckout(Model model) {
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
 
@@ -110,19 +116,42 @@ public class OrderController {
                 .orElseThrow(() -> new IllegalArgumentException("User not found: " + username));
         List<Cart> userCart = cartRepository.findByUser(user);
 
-        double subtotal = calculateSubTotal(userCart);
+        double subtotal = Order.calculateSubTotal(userCart);
 
         model.addAttribute("cart", userCart);
         model.addAttribute("subtotal", subtotal);
         model.addAttribute("order", db);
+        model.addAttribute("fee", Order.getFee());
         return "checkout";
     }
 
     @PostMapping("/checkout")
-    public String submitOrder() {
-        // email,address,payment type,datetime get from form
-        String orderID = "order#" + UUID.randomUUID().toString();
-        db.add(new Order(orderID, cart));
+
+    public String submitOrder(@RequestBody String body,
+            @RequestParam(value = "email", required = false) String email,
+            @RequestParam(value = "isDeliverable", required = false) boolean isDeliverable,
+            @RequestParam(value = "street", required = false) String street,
+            @RequestParam(value = "postcode", required = false) String postcode,
+            @RequestParam(value = "city", required = false) String city,
+            @RequestParam(value = "bookingdatetime", required = false) String booking,
+            @RequestParam(value = "paymentType", required=false) String paymentType,
+            @RequestParam(value = "username", required = false)String username
+            ) {
+                
+        //test form
+        // System.out.println("Email: " + email);
+        // System.out.println("Is Deliverable: " + isDeliverable);
+        // System.out.println("Street: " + street);
+        // System.out.println("Postcode: " + postcode);
+        // System.out.println("City: " + city);
+        // System.out.println(booking);
+        // System.out.println("PaymentType: " + paymentType);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy h:mm a", Locale.US);
+        String[] address = {street,postcode,city};
+        LocalDateTime dateTimebooking = booking.isEmpty()?null:LocalDateTime.parse(booking, formatter);
+
+        db.add(new Order(email,username,paymentType,address,isDeliverable,dateTimebooking,cart));
+
         // create new order pending payment
         return "redirect:/checkout";
     }
@@ -147,11 +176,6 @@ public class OrderController {
         return "order";
     }
 
-    public double calculateSubTotal() {
-        final double[] sum = { 0 };
-        cart.forEach(n -> sum[0] += n.calculatePrice());
-        return sum[0];
-    }
 
     public List<LocalDateTime> getBookedDates() {
         // get bookingTime from all Orders
