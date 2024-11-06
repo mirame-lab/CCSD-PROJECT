@@ -1,6 +1,5 @@
 package com.example.ccsd_project.Controller;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,6 +14,8 @@ import com.example.ccsd_project.Repository.CarRepository;
 import com.example.ccsd_project.Repository.InteriorPackagesRepository;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,55 +23,47 @@ import org.slf4j.LoggerFactory;
 public class InteriorPackagesController {
     private static final Logger logger = LoggerFactory.getLogger(InteriorPackagesController.class);
 
-
     @Autowired
     private InteriorPackagesRepository interiorPackagesRepository;
 
     @Autowired
     private CarRepository carRepository;
 
-    ArrayList<Car> cars = new CarController().carList;
-    
-
-    List<InteriorPackages> db = Arrays.asList(
-            new InteriorPackages("Package A", "Car cushion + floor panel cleaning.", 2, cars),
-            new InteriorPackages("Package B", "Car cushion + floor panel + roof panel cleaning.", 3, cars),
-            new InteriorPackages("Full Interior","Car cushion + floor panel + door panel + dashboard + boot + cleaning.", 4, cars),
-            new InteriorPackages("Advance Full","Detach seats and floor carpet. Suitable for old cars aging 5 years above", 2, cars)
-    );
-
     @PostConstruct
     public void initData() {
-    // Check if any InteriorPackages already exist in the database
-    
-    if (interiorPackagesRepository.count() == 0) {
-        interiorPackagesRepository.saveAll(db);
+        // Fetch cars from the database after Spring injects the dependencies
+        List<Car> persistedCars = carRepository.findAll();
+        
+        // Check if any InteriorPackages records already exist in the database
+        if (interiorPackagesRepository.count() == 0) {
+            createInteriorPackage("Package A", "Car cushion + floor panel cleaning.", 2, persistedCars);
+            createInteriorPackage("Package B", "Car cushion + floor panel + roof panel cleaning.", 3, persistedCars);
+            createInteriorPackage("Full Interior", "Car cushion + floor panel + door panel + dashboard + boot cleaning.", 4, persistedCars);
+            createInteriorPackage("Advance Full", "Detach seats and floor carpet. Suitable for old cars aging 5 years above", 2, persistedCars);
+        }
     }
-}
+    
+    @Transactional
+    public void createInteriorPackage(String packageName, String description, int duration, List<Car> carList) {
+        // Create a new, independent list of Car objects
+        List<Car> independentCarList = carRepository.findAllById(
+            carList.stream().map(Car::getId).toList()
+        );
+    
+        // Create and save the InteriorPackages with an independent carList
+        InteriorPackages interiorPackage = new InteriorPackages(packageName, description, duration, independentCarList);
+        interiorPackagesRepository.save(interiorPackage);
+    
+        logger.info("Created Interior Package: " + packageName + " with car list: " + independentCarList);
+    }
+    
 
-    @GetMapping("/interiorpackages")    public String get(Model model) {
-        // setPriceAllPackages();
-        // model.addAttribute("cars", );
+    @GetMapping("/interiorpackages")
+    public String get(Model model) {
         List<Car> cars = carRepository.findAll();
         model.addAttribute("cars", cars);
-        model.addAttribute("carpackages", interiorPackagesRepository.findAll());
+        List<InteriorPackages> carPackages = interiorPackagesRepository.findAll();
+        model.addAttribute("carpackages", carPackages);
         return "interiorpackages";
     }
-
-    //function utk senangkan hidup saya
-    
-
-    // public void setPrice(Car n, double first, double second) {
-    //     if (n.type.equalsIgnoreCase("mpv") || n.type.equalsIgnoreCase("mpv luxury")) {
-    //         n.setRate(first);
-    //         if (n.type.equals("mpv luxury")) {
-    //             n.setRate(n.getRate() + 50);
-    //         }
-    //     } else {
-    //         n.setRate(second);
-    //         if (n.type.equalsIgnoreCase("suv")) {
-    //             n.setRate(n.getRate() + 30);
-    //         }
-    //     }
-    // }
 }

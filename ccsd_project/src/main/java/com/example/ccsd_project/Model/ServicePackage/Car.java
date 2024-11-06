@@ -1,5 +1,9 @@
 package com.example.ccsd_project.Model.ServicePackage;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -17,6 +21,10 @@ public class Car {
     private boolean isLuxury = false;
 
     private double rate;
+
+    @ManyToMany(mappedBy = "carList")
+    @JsonBackReference
+    private List<InteriorPackages> interiorPackages;
 
     public Car() {
         // Default constructor required by JPA
@@ -61,5 +69,13 @@ public class Car {
 
     public void setRate(double rate) {
         this.rate = rate;
+    }
+
+    public List<InteriorPackages> getInteriorPackages() {
+        return interiorPackages;
+    }
+
+    public void setInteriorPackages(List<InteriorPackages> interiorPackages) {
+        this.interiorPackages = interiorPackages;
     }
 }

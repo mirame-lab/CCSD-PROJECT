@@ -1,7 +1,8 @@
 package com.example.ccsd_project.Model.ServicePackage;
 
-
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.*;
 
@@ -12,9 +13,14 @@ public class InteriorPackages extends Services {
     private String packageName;
     private String packageDesc;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "interior_package_id") // Foreign key in the Car table
-    public List<Car> carList;
+    @ManyToMany
+    @JoinTable(
+        name = "interior_package_car",
+        joinColumns = @JoinColumn(name = "interior_package_id"),
+        inverseJoinColumns = @JoinColumn(name = "car_id")
+    )
+    @JsonManagedReference
+    private List<Car> carList;
 
     public InteriorPackages() {
         super.setName("Interior Cleaning Packages");
@@ -39,4 +45,14 @@ public class InteriorPackages extends Services {
 
     public List<Car> getCarList() { return carList; }
     public void setCarList(List<Car> carList) { this.carList = carList; }
+
+    @Override
+    public String toString() {
+    return "InteriorPackages{" +
+            "id=" + getId() +
+            ", packageName='" + packageName + '\'' +
+            ", packageDesc='" + packageDesc + '\'' +
+            ", carList=" + carList.stream().map(Car::getType).toList() +
+            '}';
+    }
 }
