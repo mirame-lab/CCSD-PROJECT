@@ -7,7 +7,7 @@ public class Carpet extends Services {
         super.setCategory("Domestic/Commercial");
         super.setDescription("Clean your carpets, carpet floors, and other different types of floors");
     }
-    Carpet(String type,double rate){
+    public Carpet(String type,double rate){
         super.setRate(rate);
         this.type = type;
     }
