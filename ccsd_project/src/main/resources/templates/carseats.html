@@ -121,47 +121,12 @@
 
   <body class="contact-us">
   <!-- Navbar -->
-  <div class="container position-sticky z-index-sticky top-0"><div class="row"><div class="col-12">
-    <nav class="navbar navbar-expand-lg  blur border-radius-xl top-0 z-index-fixed shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
-      <div class="container-fluid px-0">
-        <a class="navbar-brand font-weight-bolder ms-sm-3" href="https://demos.creative-tim.com/material-kit/index" rel="tooltip" title="Designed and Coded by Creative Tim" data-placement="bottom" target="_blank">
-          Cuci Klear
-        </a>
-        <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon mt-2">
-        <span class="navbar-toggler-bar bar1"></span>
-        <span class="navbar-toggler-bar bar2"></span>
-        <span class="navbar-toggler-bar bar3"></span>
-      </span>
-        </button>
-        <div class="collapse navbar-collapse pt-3 pb-2 py-lg-0 w-100" id="navigation">
-          <ul class="navbar-nav navbar-nav-hover ms-auto">
-
-            <li class="nav-item ms-lg-auto">
-              <a class="nav-link nav-link-icon me-2" href="/" target="_blank">
-                <p class="d-inline text-sm z-index-1 font-weight-bold">About Us</p>
-              </a>
-            </li>
-
-            <li class="nav-item ms-lg-auto">
-              <a class="nav-link nav-link-icon me-2" href="./pages/contact-us.html" target="_blank">
-                <p class="d-inline text-sm z-index-1 font-weight-bold">Contact Us</p>
-              </a>
-            </li>
-
-            <li class="nav-item ms-lg-auto">
-              <a class="nav-link nav-link-icon me-2" href="./pages/sign-in.html" target="_blank">
-                <p class="d-inline text-sm z-index-1 font-weight-bold">Sign In</p>
-              </a>
-            </li>
-            <li class="nav-item my-auto ms-3 ms-lg-0"></li>
-          </ul>
-        </div>
+  <div class="container position-sticky z-index-sticky top-0">
+    <div class="row">
+      <div class="col-12">
+        <div th:replace="~{fragments/navbar.html :: navbar}"></div>
       </div>
-    </nav>
-    <!-- End Navbar -->
-  </div>
-  </div>
+    </div>
   </div>
     <!-- header with description -->
     <section
