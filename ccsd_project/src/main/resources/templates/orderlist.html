@@ -99,39 +99,19 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>001</td>
-                        <td>
-                          <ul class="text-start">
-                            <li>Interior Cleaning</li>
-                            <li>Car Cushion Cleaning</li>
+                      <tr th:each="order : ${orders}">
+                        <td th:text="${order.id}">001</td>
+                        <td >
+                          <ul class="text-start" th:each="cartitem : ${order.cart}">
+                            <li th:text="${cartitem.service}">Interior Cleaning</li>
                           </ul>
                         </td>
-                        <td><button type="button" class="btn bg-gradient-success w-auto me-2">Accepted</button></td>
-                        <td>$20</td>
-                      </tr>
-                      <tr>
-                        <td>002</td>
                         <td>
-                          <ul class="text-start">
-                            <li>Interior Cleaning</li>
-                            <li>Car Cushion Cleaning</li>
-                          </ul>
+                          <button type="button" class="btn bg-gradient-success w-auto me-2">Accepted</button>
                         </td>
-                        <td><button type="button" class="btn bg-gradient-success w-auto me-2">Accepted</button></td>
-                        <td>$10</td>
+                        <td th:text="${order.total}">$20</td>
                       </tr>
-                      <tr>
-                        <td>003</td>
-                        <td>
-                          <ul class="text-start">
-                            <li>Interior Cleaning</li>
-                            <li>Car Cushion Cleaning</li>
-                          </ul>
-                        </td>
-                        <td><button type="button" class="btn bg-gradient-danger w-auto me-2">Rejected</button></td>
-                        <td>$50</td>
-                      </tr>
+                      
                     </tbody>
                   </table>
                 </div>

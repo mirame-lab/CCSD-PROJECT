@@ -1,10 +1,7 @@
 package com.example.ccsd_project.Controller;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +25,10 @@ import com.example.ccsd_project.Repository.UserRepository;
 
 @Controller
 public class CartController {
-    
+
     List<Order> db = new ArrayList<>();
     List<Cart> userCart;
-    List<LocalDateTime> bookings = new ArrayList<>();
+   
 
     @Autowired
     private CartRepository cartRepository;
@@ -49,25 +46,26 @@ public class CartController {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
+        String redirect = "redirect:/carseats";
 
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new IllegalArgumentException("User not found: " + username));
+        try {
+            User user = userRepository.findByUsername(username)
+                    .orElseThrow(() -> new IllegalArgumentException("User not found: " + username));
+            // Generate a unique ID for the new cart item
+            String id = UUID.randomUUID().toString();
 
-        // Generate a unique ID for the new cart item
-        String id = UUID.randomUUID().toString();
+            // Create a new Cart object with the provided data
+            Cart cartItem = new Cart(id, service, pkg, car, price);
+            cartItem.setUser(user);
 
-        // Create a new Cart object with the provided data
-        Cart cartItem = new Cart(id, service, pkg, car, price);
-        cartItem.setUser(user);
+            // Save the cart item to the database using CartRepository
+            cartRepository.save(cartItem);
+        } catch (Exception e) {
+            redirect = "redirect:/login";
+        }
 
-        // Save the cart item to the database using CartRepository
-        cartRepository.save(cartItem);
-
-        // Add a flash attribute to indicate successful submission
         redirectAttributes.addFlashAttribute("submitted", true);
-
-        // Redirect back to the /interiorpackages page
-        return "redirect:/interiorpackages";
+        return redirect;
     }
 
     @PostMapping("/carseats")
@@ -77,21 +75,26 @@ public class CartController {
             @RequestParam("packageprice") double price, RedirectAttributes redirectAttributes) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
+        String redirect = "redirect:/carseats";
 
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new IllegalArgumentException("User not found: " + username));
+        try {
+            User user = userRepository.findByUsername(username)
+                    .orElseThrow(() -> new IllegalArgumentException("User not found: " + username));
+            // Generate a unique ID for the new cart item
+            String id = UUID.randomUUID().toString();
 
-        // Generate a unique ID for the new cart item
-        String id = UUID.randomUUID().toString();
+            // Create a new Cart object with the provided data
+            Cart cartItem = new Cart(id, service, pkg, car, price);
+            cartItem.setUser(user);
 
-        // Create a new Cart object with the provided data
-        Cart cartItem = new Cart(id, service, pkg, car, price);
-        cartItem.setUser(user);
+            // Save the cart item to the database using CartRepository
+            cartRepository.save(cartItem);
+        } catch (Exception e) {
+            redirect = "redirect:/login";
+        }
 
-        // Save the cart item to the database using CartRepository
-        cartRepository.save(cartItem);
         redirectAttributes.addFlashAttribute("submitted", true);
-        return "redirect:/carseats";
+        return redirect;
     }
 
     @GetMapping("/order")
@@ -135,44 +138,14 @@ public class CartController {
         return "checkout";
     }
 
-    @PostMapping("/checkout")
-
-    public String submitOrder(@RequestBody String body,
-            @RequestParam(value = "email", required = false) String email,
-            @RequestParam(value = "isDeliverable", required = false) boolean isDeliverable,
-            @RequestParam(value = "street", required = false) String street,
-            @RequestParam(value = "postcode", required = false) String postcode,
-            @RequestParam(value = "city", required = false) String city,
-            @RequestParam(value = "bookingdatetime", required = false) String booking,
-            @RequestParam(value = "paymentType", required = false) String paymentType,
-            @RequestParam(value = "username", required = false) String username) {
-
-        // test form
-        // System.out.println("Email: " + email);
-        // System.out.println("Is Deliverable: " + isDeliverable);
-        // System.out.println("Street: " + street);
-        // System.out.println("Postcode: " + postcode);
-        // System.out.println("City: " + city);
-        // System.out.println(booking);
-        // System.out.println("PaymentType: " + paymentType);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy h:mm a", Locale.US);
-        String[] address = { street, postcode, city };
-        LocalDateTime dateTimebooking = booking.isEmpty() ? null : LocalDateTime.parse(booking, formatter);
-
-        new Order(email, username, paymentType, address, isDeliverable, dateTimebooking, userCart);
-
-        // create new order pending payment
-        return "redirect:/checkout";
-    }
-
     @PostMapping("/order")
     public String createOrder(Model model) {
         return "redirect:/checkout";
     }
 
-    @DeleteMapping("/order/{id}") 
-    public String updateProduct(@PathVariable("id") long id) { 
+    @DeleteMapping("/order/{id}")
+    public String updateProduct(@PathVariable("id") long id) {
         cartRepository.deleteById(id);
-            return "redirect:/order";
-        }
+        return "redirect:/order";
+    }
 }

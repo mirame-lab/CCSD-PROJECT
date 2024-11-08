@@ -34,7 +34,7 @@ public class Order {
         this.user = user;
     }
 
-     @Column(nullable = false, unique = true)
+     @Column(nullable = false)
      private String email;
 
      @Column(nullable = false)
@@ -59,15 +59,16 @@ public class Order {
      private static boolean accepted, isRegistered;
      private int duration;
 
-     public Order(String email, String user, String payment, String[] address, boolean isDeliverable,
+     public Order(){}
+     public Order(String email, String payment, String[] address, boolean isDeliverable,
                LocalDateTime bookingTime, List<Cart> cart) {
           this.email = email;
           this.address = address;
+          this.payment = payment;
           this.isDeliverable = isDeliverable;
           this.bookingTime = bookingTime;
           this.cart = cart;
           // pending add rest of the variables from checkout form
-          this.subtotal = calculateSubTotal(cart);
           calculateTotal();
      }
 
@@ -85,7 +86,7 @@ public class Order {
           return subtotal = sum[0];
      }
 
-     public static void calculateTotal() {
+     public void calculateTotal() {
           total = subtotal + (isDeliverable ? fee : 0);
      }
 
