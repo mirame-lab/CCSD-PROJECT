@@ -2,8 +2,17 @@ package com.example.ccsd_project.Model.OrderPackage;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
-import jakarta.persistence.*;
+
+import com.example.ccsd_project.Model.UserPackage.User;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "orders")
@@ -13,10 +22,19 @@ public class Order {
      @GeneratedValue(strategy = GenerationType.IDENTITY)
      private Long id;
 
-     @Column(nullable = false, unique = true)
-     private String username;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
-     @Column(nullable = false, unique = true)
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+     @Column(nullable = false)
      private String email;
 
      @Column(nullable = false)
@@ -37,19 +55,24 @@ public class Order {
      @Column(nullable = false)
      private LocalDateTime bookingTime;
 
+     @Column
+     private int orderStatus;
+
      private static double fee = 20, subtotal;
-     private static boolean accepted, isRegistered;
+     
      private int duration;
 
-     public Order(String email, String username, String payment, String[] address, boolean isDeliverable,
+     public Order(){}
+     public Order(String email, String payment, String[] address, boolean isDeliverable,
                LocalDateTime bookingTime, List<Cart> cart) {
           this.email = email;
           this.address = address;
+          this.payment = payment;
           this.isDeliverable = isDeliverable;
           this.bookingTime = bookingTime;
           this.cart = cart;
+          orderStatus = 0;
           // pending add rest of the variables from checkout form
-          this.subtotal = calculateSubTotal(cart);
           calculateTotal();
      }
 
@@ -67,7 +90,7 @@ public class Order {
           return subtotal = sum[0];
      }
 
-     public static void calculateTotal() {
+     public void calculateTotal() {
           total = subtotal + (isDeliverable ? fee : 0);
      }
 
@@ -137,12 +160,13 @@ public class Order {
      public static void setSubtotal(double subtotal) {
           Order.subtotal = subtotal;
      }
-     
-     public String getUsername() {
-          return username;
-     }
 
-     public void setUsername(String username) {
-          this.username = username;
-     }
+    public int getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(int orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
 }

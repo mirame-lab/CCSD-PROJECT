@@ -34,9 +34,5 @@ public class IndexController {
         return "fragments/vrmediagallery";
     }
     
-    @GetMapping("/orderlist")
-    public String getOrderList() {
-        return "orderlist";
-    }
 
 }
