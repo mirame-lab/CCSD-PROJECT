@@ -105,7 +105,18 @@
                     <div class="col-md-4 text-center">
                       <h6 id="price" th:text="'RM'+ ${item.calculatePrice()}"></h6>
                     </div>
-                    <div class="col-1"> <a href=""><i class="fas fa-times"></i> </a> </div>
+                    <div class="col-1">
+                      <form th:action="@{/order/{id}(id=${item.id})}" th:object="${item}" id="myForm" method="post">
+                        <a href="#" onclick="submitForm(event)"><i class="fas fa-times"></i> </a>
+                        <input type="hidden" name="_method" value="delete"/>
+                        <script> function submitForm(event) {
+                            event.preventDefault(); // Prevent the default link behavior 
+                            document.getElementById('myForm').submit();
+                            // Submit the form 
+                          } 
+                        </script>
+                      </form>
+                    </div>
                   </div>
                 </div>
                 <hr style="display:block; background: linear-gradient(to right, white, gray, white);">
@@ -117,7 +128,7 @@
 
           <!-- END Cart item section -->
           <div class="col-lg-4">
-            <div class="card card-frame bg-gray-200" >
+            <div class="card card-frame bg-gray-200">
               <div class="card-body"><!-- Action is POST since create new order -->
                 <form method="post" action="/order">
                   <div th:fragment="summary">
@@ -132,7 +143,7 @@
                         <span id="subtotal" th:text="'RM'+ ${subtotal}"></span>
                         <input id="subtotalVal" type="hidden" th:value="${subtotal}">
                       </div>
-  
+
                     </div>
                     <hr style="display:block; background: linear-gradient(to right, white, gray, white);">
                     <div class="row">
@@ -156,13 +167,13 @@
                     </div>
                     <script th:inline="javascript">
                       calcTotal();
-                        function calcTotal() {
-                          var subtotal = parseFloat(document.getElementById("subtotalVal").value);
-                          var fee = parseFloat(document.getElementById("feeVal").value);
-                          var total = subtotal + fee;
-                          document.getElementById("total").innerHTML = "RM" + total;
-                        }
-                      </script>
+                      function calcTotal() {
+                        var subtotal = parseFloat(document.getElementById("subtotalVal").value);
+                        var fee = parseFloat(document.getElementById("feeVal").value);
+                        var total = subtotal + fee;
+                        document.getElementById("total").innerHTML = "RM" + total;
+                      }
+                    </script>
                   </div>
                   <div class="row">
                     <button type="submit" class="btn bg-gradient-dark w-100">Checkout</button>
@@ -203,56 +214,6 @@
       }, 6);
     }
 
-    // function changeQty(val, id, item) {
-    //              const updatedValue = parseInt(value); // Get the new input value
-    // console.log(item);
-    //              const data = {
-    //                  id: "",
-    //                  quantity: updatedValue,
-    //                  service: "",
-    //                  classification:"",
-    //                  price: 0,
-    //                  type: ""
-    //              };
-
-    // }
-
-    //
-    //        document.getElementById("quantity").addEventListener("change", async function (event) {
-    //          event.preventDefault()
-    //            const updatedValue = parseInt(event.target.value); // Get the new input value
-    //            console.log((typeof updatedValue) + updatedValue);
-    //            const data = {
-    //              id: "",
-    //              quantity: updatedValue,
-    //              service: "",
-    //              classification:"",
-    //              price: 0,
-    //              type: ""
-    //            }; // update quantity
-    //            const id = document.querySelector('#itemID').value
-    //          const variableFromController = /*[[${cart}]]*/
-    //            console.log(variableFromController);
-    //            try {
-    //              const response = await fetch('/order/${id}', {
-    //          method: 'PUT',
-    //          headers: {
-    //            'Content-Type': 'application/json'
-    //          },
-    //          body: data
-    //
-    //        });
-    //
-    //        if (response.ok) {
-    //          const result = await response.json();
-    //          console.log('Update successful:', result);
-    //        } else {
-    //          console.error('Update failed:', response.status);
-    //        }
-    //        } catch (error) {
-    //        console.error('Request error:', error);
-    //        }
-    //        });
   </script>
 </body>
 
