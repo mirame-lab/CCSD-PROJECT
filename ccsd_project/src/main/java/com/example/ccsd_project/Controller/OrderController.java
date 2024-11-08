@@ -24,6 +24,7 @@ import com.example.ccsd_project.Model.OrderPackage.Cart;
 import com.example.ccsd_project.Model.OrderPackage.Order;
 import com.example.ccsd_project.Model.UserPackage.User;
 import com.example.ccsd_project.Repository.CartRepository;
+import com.example.ccsd_project.Repository.OrderRepository;
 import com.example.ccsd_project.Repository.UserRepository;
 import com.example.ccsd_project.Service.OrderService;
 
@@ -37,11 +38,17 @@ public class OrderController {
     @Autowired
     private CartRepository cartRepository;
     @Autowired
+    private OrderRepository orderRepository;
+    @Autowired
     private OrderService orderService;
 
     @GetMapping
     public String listOrders(Model model) {
-        List<Order> orders = orderService.findAll();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("User not found: " + username));
+        List<Order> orders = orderRepository.findByUser(user);
         model.addAttribute("orders", orders);
         return "orderlist";
     }

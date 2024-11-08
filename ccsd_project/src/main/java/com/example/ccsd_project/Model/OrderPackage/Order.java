@@ -55,8 +55,11 @@ public class Order {
      @Column(nullable = false)
      private LocalDateTime bookingTime;
 
+     @Column
+     private int orderStatus;
+
      private static double fee = 20, subtotal;
-     private static boolean accepted, isRegistered;
+     
      private int duration;
 
      public Order(){}
@@ -68,6 +71,7 @@ public class Order {
           this.isDeliverable = isDeliverable;
           this.bookingTime = bookingTime;
           this.cart = cart;
+          orderStatus = 0;
           // pending add rest of the variables from checkout form
           calculateTotal();
      }
@@ -156,5 +160,13 @@ public class Order {
      public static void setSubtotal(double subtotal) {
           Order.subtotal = subtotal;
      }
+
+    public int getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(int orderStatus) {
+        this.orderStatus = orderStatus;
+    }
 
 }

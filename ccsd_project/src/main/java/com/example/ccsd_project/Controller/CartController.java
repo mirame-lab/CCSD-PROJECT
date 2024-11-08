@@ -46,7 +46,7 @@ public class CartController {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
-        String redirect = "redirect:/carseats";
+        String redirect = "redirect:/interiorpackages";
 
         try {
             User user = userRepository.findByUsername(username)
