@@ -23,14 +23,15 @@
 
   <title>
 
-    Material Kit 2 by Creative Tim
+    Cuci Klear
 
   </title>
 
 
 
   <!--     Fonts and icons     -->
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+  <link rel="stylesheet" type="text/css"
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
 
   <!-- Nucleo Icons -->
   <link href="./assets/css/nucleo-icons.css" rel="stylesheet" />
@@ -55,168 +56,128 @@
 
 <body class="index-page bg-gray-200">
 
-<!-- Navbar -->
-<div class="container position-sticky z-index-sticky top-0"><div class="row"><div class="col-12">
-  <nav class="navbar navbar-expand-lg  blur border-radius-xl top-0 z-index-fixed shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
-    <div class="container-fluid px-0">
-      <a class="navbar-brand font-weight-bolder ms-sm-3" rel="tooltip" data-placement="bottom" target="_blank">
-        Cuci Klear
-      </a>
-      <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon mt-2">
-        <span class="navbar-toggler-bar bar1"></span>
-        <span class="navbar-toggler-bar bar2"></span>
-        <span class="navbar-toggler-bar bar3"></span>
-      </span>
-      </button>
-      <div class="collapse navbar-collapse pt-3 pb-2 py-lg-0 w-100" id="navigation">
-        <ul class="navbar-nav navbar-nav-hover ms-auto">
-
-          <li class="nav-item ms-lg-auto">
-            <a class="nav-link nav-link-icon me-2" href="/" target="_blank">
-              <p class="d-inline text-sm z-index-1 font-weight-bold">About Us</p>
-            </a>
-          </li>
-
-          <li class="nav-item dropdown dropdown-hover mx-2">
-            <a class="nav-link ps-2 d-flex cursor-pointer align-items-center" id="dropdownMenuPages" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="material-icons opacity-6 me-2 text-md">dashboard</i>
-              Services
-              <img src="./assets/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-auto ms-md-2">
-            </a>
-            <div class="dropdown-menu dropdown-menu-animation ms-n3 dropdown-md p-3 border-radius-xl mt-0 mt-lg-3" aria-labelledby="dropdownMenuPages">
-              <div class="d-none d-lg-block">
-
-                <a href="/carseat" class="dropdown-item border-radius-md">
-                  <span>Car Cushions</span>
-                </a>
-                <a href="/interiorpackages" class="dropdown-item border-radius-md">
-                  <span>Interior Packages</span>
-                </a>
-                <a href="./" class="dropdown-item border-radius-md">
-                  <span>Upholstering & Mattresses</span>
-                </a>
-                <a href="/carpet" class="dropdown-item border-radius-md">
-                  <span>Carpets/Floors</span>
-                </a>
-              </div>
-
-            </div>
-          </li>
-
-          <li class="nav-item ms-lg-auto">
-            <a class="nav-link nav-link-icon me-2" href="./pages/contact-us.html" target="_blank">
-              <p class="d-inline text-sm z-index-1 font-weight-bold">Contact Us</p>
-            </a>
-          </li>
-
-          <li class="nav-item ms-lg-auto">
-            <a class="nav-link nav-link-icon me-2" href="./pages/sign-in.html" target="_blank">
-              <p class="d-inline text-sm z-index-1 font-weight-bold">Sign In</p>
-            </a>
-          </li>
-          <li class="nav-item my-auto ms-3 ms-lg-0"></li>
-        </ul>
-      </div>
-
-    </div>
-  </nav>
-  <!-- End Navbar -->
-</div>
-</div>
-</div>
-
-<header class="header-2">
-  <div class="page-header min-vh-75 relative" style="background-image: url('./assets/img/bg3.jpg')">
-    <span class="mask bg-gradient-primary opacity-4"></span>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-7 text-center mx-auto">
-          <h1 class="text-white pt-3 mt-n5">Cuci Klear</h1>
-          <p class="lead text-white mt-3">You rest, we clean. <br/> We offer carpet, mattress, sofa and car seat cushion deep cleaning services following the “home to home” concept since 2018. </p>
-        </div>
+  <!-- Navbar -->
+  <div class="container position-sticky z-index-sticky top-0">
+    <div class="row">
+      <div class="col-12">
+        <nav th:replace="~{fragments/navbar.html :: navbar}">
+        </nav>
+        <!-- End Navbar -->
       </div>
     </div>
   </div>
-</header>
 
-<div class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6">
-
-  <!-- START Blogs w/ 4 cards w/ image & text & link -->
-  <section class="py-3">
-    <div class="container">
-      <div class="row">
-        <div class="text-center">
-          <h3 class="mb-2">Let's get started</h3>
-          <h4 class="mb-5">Choose from any of these categories</h4>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-3 col-md-12 col-12">
-          <div class="card card-blog card-background cursor-pointer">
-            <div class="full-background" style="background-image: url('../assets/img/examples/carseat.jpg')" loading="lazy"></div>
-            <div class="card-body">
-              <div class="content-left text-start my-auto py-4">
-                <h2 class="card-title text-white">Car Cushion</h2>
-                <p class="card-description text-white">Making sure your car cushions squeaky clean</p>
-                <a href="carseats.html" class="text-white text-sm icon-move-right">See more
-                  <i class="fas fa-arrow-right text-xs ms-1"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-12 col-12">
-          <div class="card card-blog card-background cursor-pointer">
-            <div class="full-background" style="background-image: url('../assets/img/examples/interior.jpg')" loading="lazy"></div>
-            <div class="card-body">
-              <div class="content-left text-start my-auto py-4">
-                <h2 class="card-title text-white">Interior Cleaning Packages</h2>
-                <p class="card-description text-white">Imagine stepping into a spotless, fresh car interior - healthy environment for every journey.</p>
-                <a href="interiorpackages.html" class="text-white text-sm icon-move-right">See more
-                  <i class="fas fa-arrow-right text-xs ms-1"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-12 col-12">
-          <div class="card card-blog card-background cursor-pointer">
-            <div class="full-background" style="background-image: url('../assets/img/examples/mattress.jpg')" loading="lazy"></div>
-            <div class="card-body">
-              <div class="content-left text-start my-auto py-4">
-                <h2 class="card-title text-white">Upholstery & Matteresses</h2>
-                <p class="card-description text-white">Transforms your old mattresses to something brand new!</p>
-                <a href="index.html" class="text-white text-sm icon-move-right">Read More
-                  <i class="fas fa-arrow-right text-xs ms-1"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-12 col-12">
-          <div class="card card-blog card-background cursor-pointer">
-            <div class="full-background" style="background-image: url('../assets/img/examples/floor.jpg')" loading="lazy"></div>
-            <div class="card-body">
-              <div class="content-left text-start my-auto py-4">
-                <h2 class="card-title text-white">Carpet/Floors</h2>
-                <p class="card-description text-white">Rather than worrying about switching offices every couple years, you stay in the same place.</p>
-                <a href="carpet.html" class="text-white text-sm icon-move-right">Read More
-                  <i class="fas fa-arrow-right text-xs ms-1"></i>
-                </a>
-              </div>
-            </div>
+  <header class="header-2">
+    <div class="page-header min-vh-75 relative" style="background-image: url('./assets/img/bg3.jpg')">
+      <span class="mask bg-gradient-primary opacity-4"></span>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7 text-center mx-auto">
+            <h1 class="text-white pt-3 mt-n5">Cuci Klear</h1>
+            <p class="lead text-white mt-3">You rest, we clean. <br /> We offer carpet, mattress, sofa and car seat
+              cushion deep cleaning services following the “home to home” concept since 2018. </p>
           </div>
         </div>
       </div>
     </div>
-  </section>
-  <!-- END Blogs w/ 4 cards w/ image & text & link -->
+  </header>
+
+  <div class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6">
+
+    <!-- START Blogs w/ 4 cards w/ image & text & link -->
+    <section class="py-3">
+      <div class="container">
+        <div class="row">
+          <div class="text-center">
+            <h3 class="mb-2">Let's get started</h3>
+            <h4 class="mb-5">Choose from any of these categories</h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-3 col-md-12 col-12">
+            <div class="card card-blog card-background cursor-pointer">
+              <div class="full-background" style="background-image: url('../assets/img/examples/carseat.jpg')"
+                loading="lazy"></div>
+              <div class="card-body">
+                <div class="content-left text-start my-auto py-4">
+                  <h2 class="card-title text-white">Car Cushion</h2>
+                  <p class="card-description text-white">Making sure your car cushions squeaky clean</p>
+                  <a href="/carseats" class="text-white text-sm icon-move-right">See more
+                    <i class="fas fa-arrow-right text-xs ms-1"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-12 col-12">
+            <div class="card card-blog card-background cursor-pointer">
+              <div class="full-background" style="background-image: url('../assets/img/examples/interior.jpg')"
+                loading="lazy"></div>
+              <div class="card-body">
+                <div class="content-left text-start my-auto py-4">
+                  <h2 class="card-title text-white">Interior Cleaning Packages</h2>
+                  <p class="card-description text-white">Imagine stepping into a spotless, fresh car interior - healthy
+                    environment for every journey.</p>
+                  <a href="/interiorpackages" class="text-white text-sm icon-move-right">See more
+                    <i class="fas fa-arrow-right text-xs ms-1"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-12 col-12">
+            <div class="card card-blog card-background cursor-pointer position-relative">
+              <div class="full-background" style="background-image: url('../assets/img/examples/floor.jpg')"
+                loading="lazy"></div>
+              <div class="card-body">
+                <div class="content-left text-start my-auto py-4">
+                  <h2 class="card-title text-white">Upholstery</h2>
+                  <p class="card-description text-white">Transform your old mattresses into something new!</p>
+                  <a href="#" class="text-white text-sm icon-move-right">Read More <i
+                      class="fas fa-arrow-right text-xs ms-1"></i></a>
+                </div>
+              </div>
+              <!-- Overlay Element -->
+              <div
+                class="overlay text-center position-absolute w-100 h-100 d-flex align-items-center justify-content-center"
+                style="top: 0; left: 0; background-color: rgba(128, 128, 128, 0.7); z-index: 10;">
+                <h2 class="text-white">Coming Soon</h2>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-12 col-12">
+            <div class="card card-blog card-background cursor-pointer" style="position: relative;">
+              <div class="full-background" style="background-image: url('../assets/img/examples/floor.jpg')"
+                loading="lazy"></div>
+              <div class="card-body">
+                <div class="content-left text-start my-auto py-4">
+                  <h2 class="card-title text-white">Carpet/Floors</h2>
+                  <p class="card-description text-white">Rather than worrying about switching offices every couple
+                    years, you stay in the same place.</p>
+                  <a href="/carpet" class="text-white text-sm icon-move-right">Read More
+                    <i class="fas fa-arrow-right text-xs ms-1"></i>
+                  </a>
+                </div>
+                <!-- Overlay Element -->
+                <div
+                  class="overlay text-center position-absolute w-100 h-100 d-flex align-items-center justify-content-center"
+                  style="top: 0; left: 0; background-color: rgba(128, 128, 128, 0.7); z-index: 10;">
+                  <h2 class="text-white">Coming Soon</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+    <!-- END Blogs w/ 4 cards w/ image & text & link -->
 
 
-  <section class="my-5 py-5">
-    <div class="container">
-      <div class="col-lg-10 ms-auto">
+    <section class="my-5 py-5">
+      <div class="container">
+        <div class="col-lg-10 ms-auto">
           <div class="row justify-content-start">
             <div class="col-md-6">
               <div class="info">
@@ -249,7 +210,7 @@
           </div>
         </div>
       </div>
-    </div>
+  </div>
   </section>
 
   <!-- -------   START PRE-FOOTER 2 - simple social line w/ title & 3 buttons    -------- -->
@@ -276,66 +237,66 @@
   </div>
   <!-- -------   END PRE-FOOTER 2 - simple social line w/ title & 3 buttons    -------- -->
 
-</div>
-
-<footer class="footer pt-5 mt-5">
-  <div class="container">
   </div>
-</footer>
+
+  <footer class="footer pt-5 mt-5">
+    <div class="container">
+    </div>
+  </footer>
 
 
-<!--   Core JS Files   -->
-<script src="./assets/js/core/popper.min.js" type="text/javascript"></script>
-<script src="./assets/js/core/bootstrap.min.js" type="text/javascript"></script>
-<script src="./assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <!--   Core JS Files   -->
+  <script src="./assets/js/core/popper.min.js" type="text/javascript"></script>
+  <script src="./assets/js/core/bootstrap.min.js" type="text/javascript"></script>
+  <script src="./assets/js/plugins/perfect-scrollbar.min.js"></script>
 
-<!--  Plugin for TypedJS, full documentation here: https://github.com/inorganik/CountUp.js -->
-<script src="./assets/js/plugins/countup.min.js"></script>
-<script src="./assets/js/plugins/choices.min.js"></script>
-<script src="./assets/js/plugins/prism.min.js"></script>
-<script src="./assets/js/plugins/highlight.min.js"></script>
+  <!--  Plugin for TypedJS, full documentation here: https://github.com/inorganik/CountUp.js -->
+  <script src="./assets/js/plugins/countup.min.js"></script>
+  <script src="./assets/js/plugins/choices.min.js"></script>
+  <script src="./assets/js/plugins/prism.min.js"></script>
+  <script src="./assets/js/plugins/highlight.min.js"></script>
 
-<!--  Plugin for Parallax, full documentation here: https://github.com/dixonandmoe/rellax -->
-<script src="./assets/js/plugins/rellax.min.js"></script>
-<!--  Plugin for TiltJS, full documentation here: https://gijsroge.github.io/tilt.js/ -->
-<script src="./assets/js/plugins/tilt.min.js"></script>
-<!--  Plugin for Selectpicker - ChoicesJS, full documentation here: https://github.com/jshjohnson/Choices -->
-<script src="./assets/js/plugins/choices.min.js"></script>
+  <!--  Plugin for Parallax, full documentation here: https://github.com/dixonandmoe/rellax -->
+  <script src="./assets/js/plugins/rellax.min.js"></script>
+  <!--  Plugin for TiltJS, full documentation here: https://gijsroge.github.io/tilt.js/ -->
+  <script src="./assets/js/plugins/tilt.min.js"></script>
+  <!--  Plugin for Selectpicker - ChoicesJS, full documentation here: https://github.com/jshjohnson/Choices -->
+  <script src="./assets/js/plugins/choices.min.js"></script>
 
-<!-- Control Center for Material UI Kit: parallax effects, scripts for the example pages etc -->
-<!--  Google Maps Plugin    -->
+  <!-- Control Center for Material UI Kit: parallax effects, scripts for the example pages etc -->
+  <!--  Google Maps Plugin    -->
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI"></script>
-<script src="./assets/js/material-kit.min.js?v=3.0.4" type="text/javascript"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI"></script>
+  <script src="./assets/js/material-kit.min.js?v=3.0.4" type="text/javascript"></script>
 
 
-<script type="text/javascript">
+  <script type="text/javascript">
 
-  if (document.getElementById('state1')) {
-    const countUp = new CountUp('state1', document.getElementById("state1").getAttribute("countTo"));
-    if (!countUp.error) {
-      countUp.start();
-    } else {
-      console.error(countUp.error);
+    if (document.getElementById('state1')) {
+      const countUp = new CountUp('state1', document.getElementById("state1").getAttribute("countTo"));
+      if (!countUp.error) {
+        countUp.start();
+      } else {
+        console.error(countUp.error);
+      }
     }
-  }
-  if (document.getElementById('state2')) {
-    const countUp1 = new CountUp('state2', document.getElementById("state2").getAttribute("countTo"));
-    if (!countUp1.error) {
-      countUp1.start();
-    } else {
-      console.error(countUp1.error);
+    if (document.getElementById('state2')) {
+      const countUp1 = new CountUp('state2', document.getElementById("state2").getAttribute("countTo"));
+      if (!countUp1.error) {
+        countUp1.start();
+      } else {
+        console.error(countUp1.error);
+      }
     }
-  }
-  if (document.getElementById('state3')) {
-    const countUp2 = new CountUp('state3', document.getElementById("state3").getAttribute("countTo"));
-    if (!countUp2.error) {
-      countUp2.start();
-    } else {
-      console.error(countUp2.error);
-    };
-  }
-</script>
+    if (document.getElementById('state3')) {
+      const countUp2 = new CountUp('state3', document.getElementById("state3").getAttribute("countTo"));
+      if (!countUp2.error) {
+        countUp2.start();
+      } else {
+        console.error(countUp2.error);
+      };
+    }
+  </script>
 
 </body>
 

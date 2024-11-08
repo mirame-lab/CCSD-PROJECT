@@ -80,7 +80,6 @@ public class OrderController {
         String[] address = { street, postcode, city };
         LocalDateTime dateTimebooking = booking.isEmpty() ? null : LocalDateTime.parse(booking, formatter);
 
-        System.out.println(userCart);
         Order newOrder = new Order(email, paymentType, address, isDeliverable, dateTimebooking, userCart);
         newOrder.setUser(user);
         newOrder.calculateTotal();
