@@ -3,8 +3,8 @@
   &.btn-facebook {
     @include social-buttons-color($facebook, $facebook-states);
   }
-  &.btn-twitter {
-    @include social-buttons-color($twitter, $twitter-states);
+  &.btn-tiktok {
+    @include social-buttons-color($tiktok, $tiktok-states);
   }
   &.btn-pinterest {
     @include social-buttons-color($pinterest, $pinterest-states);
